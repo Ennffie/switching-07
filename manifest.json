@@ -2,15 +2,15 @@
   "name": "我的強積金",
   "short_name": "強積金",
   "description": "強積金管理應用",
-  "start_url": "/Switching-04/",
+  "start_url": "/switching-07/",
   "display": "standalone",
   "background_color": "#F5F5F5",
   "theme_color": "#E67E22",
   "orientation": "portrait",
-  "scope": "/Switching-04/",
+  "scope": "/switching-07/",
   "icons": [
     {
-      "src": "/Switching-04/app-icon.jpg",
+      "src": "/switching-07/app-icon.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
