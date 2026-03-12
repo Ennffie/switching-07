@@ -35,15 +35,7 @@ interface TransferContextType {
 }
 
 const defaultData: TransferData = {
-  step1: {
-    planName: '友邦強積金優選計劃',
-    trustee: '友邦(信託)有限',
-    accountNumber: '56442131',
-    accountType: '一般僱員',
-    balance: 128396.91,
-    employerName: '實運有限公司',
-    icon: './icons/aia-logo-new.jpg',
-  },
+  step1: null,
   transferOut: [],
   transferIn: [],
 };

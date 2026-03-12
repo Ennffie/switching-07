@@ -30,10 +30,11 @@ const SelectPlanPage = () => {
   
   // 從 Context 讀取已選擇嘅計劃
   const [selectedPlan, setSelectedPlan] = useState<string>(() => {
-    // 如果 Context 有資料，返返對應嘅 plan id
+    // 如果 Context 有資料，返返對應嘅 plan id；否則預設唔揀
     if (transferData.step1?.planName.includes('友邦')) return 'aia';
     if (transferData.step1?.planName.includes('宏利')) return 'manulife';
-    return 'aia'; // 預設
+    if (transferData.step1?.planName.includes('滙豐')) return 'hsbc';
+    return '';
   });
 
   const plans: Plan[] = [
@@ -72,9 +73,10 @@ const SelectPlanPage = () => {
   ];
 
   const handlePlanClick = (planId: string) => {
+    setSelectedPlan(planId);
+
+    // 只有第一個選項（AIA）先寫入可用資料，其他只係視覺上可選
     if (planId === 'aia') {
-      setSelectedPlan(planId);
-      // 儲存到 Context
       const selectedPlanData = plans.find(p => p.id === planId);
       if (selectedPlanData) {
         setStep1Data({
@@ -88,7 +90,6 @@ const SelectPlanPage = () => {
         });
       }
     }
-    // 宏利按下無反應（不能選擇）
   };
 
   const handleOpenModal = (e: React.MouseEvent, plan: Plan) => {
@@ -150,12 +151,12 @@ const SelectPlanPage = () => {
         <div className="space-y-4">
           {plans.map((plan) => {
             const isSelected = selectedPlan === plan.id;
-            const isClickable = plan.id === 'aia';
+            const isClickable = true;
             
             return (
               <div
                 key={plan.id}
-                onClick={() => isClickable && handlePlanClick(plan.id)}
+                onClick={() => handlePlanClick(plan.id)}
                 className={`
                   bg-white rounded-2xl p-5 border-2 transition-all
                   ${isSelected ? 'border-[#E67E22]' : 'border-gray-200'}
@@ -212,10 +213,10 @@ const SelectPlanPage = () => {
       <div className="fixed bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200">
         <button
           onClick={handleNext}
-          disabled={!selectedPlan}
+          disabled={selectedPlan !== 'aia'}
           className={`
             w-full py-3 rounded-lg text-base font-medium transition-all
-            ${selectedPlan 
+            ${selectedPlan === 'aia' 
               ? 'bg-[#1e3a5f] text-white' 
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }
