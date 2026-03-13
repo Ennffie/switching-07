@@ -27,8 +27,29 @@ export default function BottomNav({ activeTab }: BottomNavProps) {
         const active = activeTab === tab.id;
         return (
           <button key={tab.id} onClick={() => navigate(tab.path)} className="flex flex-col items-center justify-end" style={{ width: '64px', height: '48px' }}>
-            <div style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
               <img src={active ? tab.activeIcon : tab.icon} alt={tab.label} style={{ width: '24px', height: '24px' }} />
+              {tab.id === 'todo' && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-5px',
+                    right: '-7px',
+                    minWidth: '16px',
+                    height: '16px',
+                    borderRadius: '999px',
+                    background: '#F59E0B',
+                    color: '#fff',
+                    fontSize: '10px',
+                    lineHeight: '16px',
+                    fontWeight: 600,
+                    textAlign: 'center',
+                    padding: '0 4px'
+                  }}
+                >
+                  2
+                </span>
+              )}
             </div>
             <span className="text-xs mt-1" style={{ color: active ? '#E67E22' : '#9CA3AF', lineHeight: '16px', fontWeight: active ? 500 : 400 }}>{tab.label}</span>
           </button>
