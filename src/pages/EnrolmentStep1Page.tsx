@@ -46,8 +46,8 @@ const EnrolmentStep1Page = () => {
         </div>
 
         <div className="bg-white rounded-[28px] border border-[#D8D1D1] shadow-[0_3px_12px_rgba(0,0,0,0.08)] px-6 pt-8 pb-7">
-          <h3 className="text-[22px] font-bold text-[#1F1F1F] mb-2 text-center tracking-[-0.01em]">海通 MPF 退休金</h3>
-          <p className="text-[16px] text-[#666666] leading-[1.6] mb-7">HSBC Provident Fund Trustee (Hong Kong) Limited</p>
+          <h3 className="text-[22px] font-bold text-[#1F1F1F] mb-2 text-center tracking-[-0.01em]">友邦強積金優選計劃</h3>
+          <p className="text-[16px] text-[#666666] leading-[1.6] mb-7">AIA MPF - Prime Value Choice</p>
 
           <div className="bg-[#F7EFE7] rounded-[16px] px-6 py-7 flex items-start justify-between">
             <div>
