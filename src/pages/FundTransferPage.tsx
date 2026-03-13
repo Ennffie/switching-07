@@ -51,10 +51,6 @@ const fullInFunds: Fund[] = [
   { id: 'in19', name: '友邦強積金優選計劃 - 中港基金', balance: 0, allocation: 0, riskLevel: 6 },
   { id: 'in20', name: '友邦強積金優選計劃 - 北美股票基金', balance: 0, allocation: 0, riskLevel: 6 },
   { id: 'in21', name: '友邦強積金優選計劃 - 全球基金', balance: 0, allocation: 0, riskLevel: 6 },
-  { id: 'in22', name: '友邦強積金優選計劃 - 富達穩定資本基金', balance: 0, allocation: 0, riskLevel: 4 },
-  { id: 'in23', name: '友邦強積金優選計劃 - 富達穩定增長基金', balance: 0, allocation: 0, riskLevel: 4 },
-  { id: 'in24', name: '友邦強積金優選計劃 - 富達增長基金', balance: 0, allocation: 0, riskLevel: 5 },
-  { id: 'in25', name: '友邦強積金優選計劃 - 退休收益基金', balance: 0, allocation: 0, riskLevel: 1, disabled: true },
 ];
 
 // 轉出基金列表（強制性供款版本 - 總數 $128,396.91）
