@@ -54,13 +54,20 @@ const EnrolmentStep1Page = () => {
           <h3 className="text-[22px] font-bold text-[#1F1F1F] mb-2 text-center tracking-[-0.01em]">友邦強積金優選計劃</h3>
           <p className="text-[16px] text-[#666666] leading-[1.6] mb-7">AIA MPF - Prime Value Choice</p>
 
-          <div className="bg-[#F7EFE7] rounded-[16px] px-6 py-7 flex items-start justify-between">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open('https://www.aia.com.hk/content/dam/hk-financial-assets/zh/docs/individual/wealth-management/mpf/aia-mpf-prime-value-choice-brochure-chi.pdf', '_blank', 'noopener,noreferrer');
+            }}
+            className="w-full bg-[#F7EFE7] rounded-[16px] px-6 py-7 flex items-start justify-between text-left"
+          >
             <div>
               <div className="text-[18px] font-bold text-[#1F1F1F] mb-6">成分基金列表</div>
               <div className="text-[16px] text-[#1F1F1F] leading-[1.5]">由受託人提供</div>
             </div>
             <ExternalLink size={24} className="text-[#1F1F1F] flex-shrink-0 mt-1" />
-          </div>
+          </button>
         </button>
       </div>
 
