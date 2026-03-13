@@ -24,7 +24,7 @@ const EnrolmentIAMSmartPage = () => {
       </div>
 
       <div className="px-6 pt-8 flex-1">
-        <img src="./icons/icon-iam-smart.png" alt="iAM Smart" className="w-[190px] object-contain mb-8" />
+        <img src="./icons/icon-iam-smart-user.jpg" alt="iAM Smart" className="w-[190px] object-contain mb-8" />
         <h2 className="text-[24px] font-bold text-[#E6A23C] mb-6">你將被帶到「智方便」。</h2>
         <div className="border-t border-[#DADADA] pt-5">
           <h3 className="text-[20px] font-bold text-[#1F1F1F] mb-4">關於「智方便」</h3>

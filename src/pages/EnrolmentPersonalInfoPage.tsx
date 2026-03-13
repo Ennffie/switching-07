@@ -61,7 +61,7 @@ const EnrolmentPersonalInfoPage = () => {
               <label className="block text-[16px] text-[#666666] mb-2">{label}</label>
               <div className="flex items-center gap-3">
                 <div className="flex-1 h-[58px] rounded-[8px] border border-[#DADADA] bg-[#F3F2F2] px-4 flex items-center text-[18px] text-[#A7A3A3]">{value}</div>
-                <img src="./icons/icon-iam-smart.png" alt="iAM" className="w-8 h-8 object-contain opacity-70" />
+                <img src="./icons/icon-iam-smart-user.jpg" alt="iAM" className="w-8 h-8 object-contain opacity-70" />
               </div>
             </div>
           ))}

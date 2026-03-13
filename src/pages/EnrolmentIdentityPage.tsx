@@ -19,7 +19,7 @@ const EnrolmentIdentityPage = () => {
         <p className="text-[18px] leading-[1.55] text-[#1F1F1F] mb-10">為遵守《打擊洗錢及恐怖分子資金籌集條例》（第615章），我們仍須在你每次登記參加強積金計劃時獨立驗證你的身分。</p>
 
         <button onClick={() => navigate('/enrolment-iam-smart')} className="w-full bg-white rounded-[26px] px-6 py-8 shadow-[0_4px_14px_rgba(0,0,0,0.10)] border border-[#D6D1D1] flex flex-col items-center text-center">
-          <img src="./icons/icon-iam-smart.png" alt="iAM Smart" className="w-[190px] object-contain mb-6" />
+          <img src="./icons/icon-iam-smart-user.jpg" alt="iAM Smart" className="w-[190px] object-contain mb-6" />
           <div className="text-[20px] text-[#1F1F1F]">登入「智方便」驗證</div>
         </button>
       </div>
