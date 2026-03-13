@@ -12,6 +12,7 @@ const OverviewPage = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [activeFilter, setActiveFilter] = useState('personal');
   const [showNameStars, setShowNameStars] = useState(false);
+  const [showShortcuts, setShowShortcuts] = useState(false);
 
   const totalBalance = 285634.43;
   const totalGain = 168225.16;
@@ -334,9 +335,44 @@ const OverviewPage = () => {
       </div>
 
       {/* 浮動按鈕 */}
-      <button className="fixed bottom-24 right-4 w-12 h-12 bg-[#1e3a5f] rounded-full flex items-center justify-center shadow-lg">
+      <button
+        onClick={() => setShowShortcuts(true)}
+        className="fixed bottom-24 right-4 w-12 h-12 bg-[#1e3a5f] rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.22)] z-40"
+      >
         <LayoutGrid size={22} className="text-white" />
       </button>
+
+      {showShortcuts && (
+        <>
+          <div className="fixed inset-0 bg-black/35 z-40" onClick={() => setShowShortcuts(false)} />
+          <div className="fixed left-0 right-0 bottom-0 bg-white rounded-t-[20px] px-5 pt-7 pb-20 z-50 min-h-[330px] shadow-[0_-4px_20px_rgba(0,0,0,0.12)]">
+            <div className="grid grid-cols-4 gap-y-8 gap-x-2">
+              {[
+                { icon: './icons/shortcut-fund-switch.png', label: '基金轉換' },
+                { icon: './icons/shortcut-future-invest.png', label: '未來供款的投資授權' },
+                { icon: './icons/shortcut-transfer-account.png', label: '整合個人帳戶' },
+                { icon: './icons/shortcut-self-employed-transfer.png', label: '轉職後 / 自僱人士帳戶轉移' },
+                { icon: './icons/shortcut-statement.png', label: '信件及報表' },
+                { icon: './icons/shortcut-edit.png', label: '編輯快捷連結' },
+              ].map((item) => (
+                <button key={item.label} className="flex flex-col items-center text-center">
+                  <div className="w-14 h-14 rounded-full bg-[#F6F7F8] flex items-center justify-center mb-2">
+                    <img src={item.icon} alt={item.label} className="w-7 h-7 object-contain" />
+                  </div>
+                  <span className="text-[12px] leading-[1.35] text-[#1f1f1f] max-w-[78px]">{item.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setShowShortcuts(false)}
+              className="absolute right-6 bottom-8 w-14 h-14 rounded-full bg-[#1e3a5f] flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.22)]"
+            >
+              <img src="./icons/shortcut-close.png" alt="關閉" className="w-5 h-5 object-contain invert" />
+            </button>
+          </div>
+        </>
+      )}
 
       {/* Bottom Navigation - 統一樣式 + Safe Area */}
       <div 
