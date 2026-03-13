@@ -33,7 +33,7 @@ const EnrolmentInstructionPage = () => {
 
   return (
     <div className="min-h-screen bg-[#F7F6F5] flex flex-col">
-      <div className="bg-white border-b border-[#ECECEC] px-4 pt-4 pb-4 flex items-center justify-center relative shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+      <div className="sticky top-0 z-20 bg-white border-b border-[#ECECEC] px-4 pt-4 pb-4 flex items-center justify-center relative shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
         <button onClick={() => navigate(-1)} className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center">
           <img src="./icons/icon-back.png" alt="返回" className="w-6 h-6 object-contain" />
         </button>
