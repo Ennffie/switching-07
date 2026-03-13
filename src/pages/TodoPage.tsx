@@ -17,6 +17,8 @@ const TodoPage = () => {
       navigate('/my-mpf');
     } else if (tabId === 'todo') {
       navigate('/todo');
+    } else if (tabId === 'profile') {
+      navigate('/profile');
     }
   };
 

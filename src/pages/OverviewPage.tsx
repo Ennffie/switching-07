@@ -58,6 +58,8 @@ const OverviewPage = () => {
       navigate('/');
     } else if (tabId === 'todo') {
       navigate('/todo');
+    } else if (tabId === 'profile') {
+      navigate('/profile');
     }
   };
 
