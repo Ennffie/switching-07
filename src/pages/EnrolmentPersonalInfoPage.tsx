@@ -11,7 +11,7 @@ const jobOptions = [
 
 const EnrolmentPersonalInfoPage = () => {
   const navigate = useNavigate();
-  const [showJobOptions, setShowJobOptions] = useState(true);
+  const [showJobOptions, setShowJobOptions] = useState(false);
   const [showCrs, setShowCrs] = useState(true);
   const [selectedTax, setSelectedTax] = useState('hk-only');
 
@@ -98,13 +98,13 @@ const EnrolmentPersonalInfoPage = () => {
 
           <div>
             <label className="block text-[16px] text-[#666666] mb-2">職位</label>
-            <button onClick={() => setShowJobOptions(v => !v)} className={`w-full h-[58px] rounded-[8px] border px-4 flex items-center justify-between text-[18px] ${showJobOptions ? 'border-[#E3C16A] bg-white text-[#C9C5C5]' : 'border-[#DADADA] bg-white text-[#C9C5C5]'}`}>
-              請選擇 <span>{showJobOptions ? '⌃' : '⌄'}</span>
+            <button onClick={() => setShowJobOptions(v => !v)} className={`w-full h-[58px] rounded-[8px] border px-4 flex items-center justify-between text-[18px] ${showJobOptions ? 'border-[#E3C16A] bg-white text-[#1F1F1F]' : 'border-[#DADADA] bg-white text-[#1F1F1F]'}`}>
+              行政和商業經理 <span>{showJobOptions ? '⌃' : '⌄'}</span>
             </button>
             {showJobOptions && (
               <div className="bg-white border border-[#E5E5E5] rounded-b-[8px] shadow-[0_6px_14px_rgba(0,0,0,0.08)] overflow-hidden">
                 {jobOptions.map((opt) => (
-                  <div key={opt} className="px-5 py-5 text-[18px] text-[#1F1F1F] border-b last:border-b-0 border-[#F0F0F0]">{opt}</div>
+                  <div key={opt} className={`px-5 py-5 text-[18px] border-b last:border-b-0 border-[#F0F0F0] ${opt === '行政和商業經理' ? 'text-[#1F1F1F] bg-[#FAF7F2]' : 'text-[#1F1F1F]'}`}>{opt}</div>
                 ))}
               </div>
             )}
