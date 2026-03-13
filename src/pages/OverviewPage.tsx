@@ -56,6 +56,8 @@ const OverviewPage = () => {
       navigate('/my-mpf');
     } else if (tabId === 'overview') {
       navigate('/');
+    } else if (tabId === 'todo') {
+      navigate('/todo');
     }
   };
 
