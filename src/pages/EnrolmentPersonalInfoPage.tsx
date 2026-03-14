@@ -64,10 +64,10 @@ const EnrolmentPersonalInfoPage = () => {
             <div className="h-[58px] rounded-[8px] border border-[#DADADA] bg-[#F3F2F2] px-4 flex items-center justify-between text-[18px] text-[#A7A3A3]">先生 <span>⌄</span></div>
           </div>
           {[
-            ['姓氏（英文）','CHAN'],
-            ['名字（英文）','TAI MAN'],
-            ['姓氏（中文）','陳'],
-            ['名字（中文）','大文'],
+            ['姓氏（英文）','WONG'],
+            ['名字（英文）','KA MING'],
+            ['姓氏（中文）','黃'],
+            ['名字（中文）','家明'],
           ].map(([label, value]) => (
             <div key={label}>
               <label className="block text-[16px] text-[#666666] mb-2">{label}</label>
