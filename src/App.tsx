@@ -7,6 +7,7 @@ import MyMPFPage from './pages/MyMPFPage';
 import OverviewPage from './pages/OverviewPage';
 import InvestPage from './pages/InvestPage';
 import InvestInfoPage from './pages/InvestInfoPage';
+import InvestFutureInfoPage from './pages/InvestFutureInfoPage';
 import SelectPlanPage from './pages/SelectPlanPage';
 import FundTransferPage from './pages/FundTransferPage';
 import ConfirmPage from './pages/ConfirmPage';
@@ -42,6 +43,7 @@ function App() {
           <Route path="/my-mpf" element={<MyMPFPage />} />
           <Route path="/invest" element={<InvestPage />} />
           <Route path="/invest/info" element={<InvestInfoPage />} />
+          <Route path="/invest/future-info" element={<InvestFutureInfoPage />} />
           <Route path="/invest/select-plan" element={<SelectPlanPage />} />
           <Route path="/invest/fund-transfer" element={<FundTransferPage />} />
           <Route path="/invest/confirm" element={<ConfirmPage />} />

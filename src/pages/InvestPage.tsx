@@ -15,9 +15,9 @@ const InvestPage = () => {
     }
   };
 
-  const handleInfoClick = (e: React.MouseEvent) => {
+  const handleInfoClick = (e: React.MouseEvent, type: 'existing' | 'future') => {
     e.stopPropagation();
-    navigate('/invest/info');
+    navigate(type === 'existing' ? '/invest/info' : '/invest/future-info');
   };
 
   return (
@@ -35,7 +35,7 @@ const InvestPage = () => {
 
         <div className="space-y-5">
           <div onClick={() => handleCardClick('existing')} className="border-4 border-gray-200 rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-shadow bg-white relative">
-            <button onClick={handleInfoClick} className="absolute top-5 right-5 p-1.5 text-gray-400 hover:text-gray-600">
+            <button onClick={(e) => handleInfoClick(e, 'existing')} className="absolute top-5 right-5 p-1.5 text-gray-400 hover:text-gray-600">
               <Info size={22} />
             </button>
             <div className="flex items-start">
@@ -50,7 +50,7 @@ const InvestPage = () => {
           </div>
 
           <div onClick={() => handleCardClick('future')} className="border-4 border-gray-200 rounded-2xl p-6 cursor-pointer hover:shadow-lg transition-shadow bg-white relative">
-            <button onClick={handleInfoClick} className="absolute top-5 right-5 p-1.5 text-gray-400 hover:text-gray-600">
+            <button onClick={(e) => handleInfoClick(e, 'future')} className="absolute top-5 right-5 p-1.5 text-gray-400 hover:text-gray-600">
               <Info size={22} />
             </button>
             <div className="flex items-start">
