@@ -47,7 +47,7 @@ const EnrolmentRiskLevelPage = () => {
 
         <div className="border border-[#E5E5E5]">
           <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-[#F5A623] text-white text-[16px] font-medium">
-            <div className="px-4 py-4">風險級別</div>
+            <div className="px-4 py-4">基金風險標記</div>
             <div className="px-4 py-4 text-center border-l border-white/30">相等或以上</div>
             <div className="px-4 py-4 text-center border-l border-white/30">少於</div>
           </div>
