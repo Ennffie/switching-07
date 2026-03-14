@@ -27,6 +27,7 @@ import EnrolmentConfirmPage from './pages/EnrolmentConfirmPage';
 import EnrolmentSubmittedPage from './pages/EnrolmentSubmittedPage';
 import EnrolmentIAMSmartPage from './pages/EnrolmentIAMSmartPage';
 import EnrolmentIdentityPage from './pages/EnrolmentIdentityPage';
+import EnrolmentDISPage from './pages/EnrolmentDISPage';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/enrolment-personal-info" element={<EnrolmentPersonalInfoPage />} />
           <Route path="/enrolment-step-3-invest" element={<EnrolmentStep3InvestPage />} />
           <Route path="/enrolment-terms" element={<EnrolmentTermsPage />} />
+            <Route path="/enrolment-dis" element={<EnrolmentDISPage />} />
             <Route path="/enrolment-submitted" element={<EnrolmentSubmittedPage />} />
           <Route path="/enrolment-confirm" element={<EnrolmentConfirmPage />} />
           <Route path="/quiz/personality" element={<PersonalityQuizPage />} />

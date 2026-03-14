@@ -84,7 +84,7 @@ const EnrolmentStep3InvestPage = () => {
   };
 
   const openDisInfo = () => {
-    window.open('https://www.mpfa.org.hk/tc/mpf-system/default-investment-strategy', '_blank', 'noopener,noreferrer');
+    navigate('/enrolment-dis');
   };
 
   const applyAllocation = (id: string, parsed: number) => {
