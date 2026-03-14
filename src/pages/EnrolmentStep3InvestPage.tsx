@@ -55,7 +55,10 @@ const EnrolmentStep3InvestPage = () => {
   useEffect(() => { window.scrollTo(0,0); }, []);
 
   const currentFunds = contributionType === 'mandatory' ? mandatoryFunds : voluntaryFunds;
-  const total = useMemo(() => currentFunds.reduce((sum, f) => sum + f.allocation, 0), [currentFunds]);
+  const mandatoryTotal = useMemo(() => mandatoryFunds.reduce((sum, f) => sum + f.allocation, 0), [mandatoryFunds]);
+  const voluntaryTotal = useMemo(() => voluntaryFunds.reduce((sum, f) => sum + f.allocation, 0), [voluntaryFunds]);
+  const total = contributionType === 'mandatory' ? mandatoryTotal : voluntaryTotal;
+  const isNextEnabled = mandatoryTotal === 100 && voluntaryTotal === 100;
 
   return (
     <div className="min-h-screen bg-[#F6F5F4] flex flex-col">
@@ -138,7 +141,7 @@ const EnrolmentStep3InvestPage = () => {
           <span className="text-[#1F1F1F]">總和：</span>
           <span className="text-[#E39118] text-[20px] font-bold">{total}%</span>
         </div>
-        <button className="w-full h-[58px] rounded-full bg-[#E6E3E3] text-[#B8B4B4] text-[19px] font-semibold mb-4">下一步</button>
+        <button className={`w-full h-[58px] rounded-full text-[19px] font-semibold mb-4 ${isNextEnabled ? "bg-[#19345B] text-white" : "bg-[#E6E3E3] text-[#B8B4B4]"}`}>下一步</button>
         <div className="text-center text-[18px] text-[#9A9696]">新增指示</div>
       </div>
     </div>
