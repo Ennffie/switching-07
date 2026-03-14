@@ -35,10 +35,10 @@ const accounts: Account[] = [
     member: '29819644',
     date: '26/01/2011',
     type: '一般僱員',
-    balance: '$ 44,905.94',
-    mandatoryBalance: '$ 22,452.97',
-    voluntaryBalance: '$ 22,452.97',
-    gain: '$ 33,109.71',
+    balance: '$ 128,396.91',
+    mandatoryBalance: '$ 68,389.17',
+    voluntaryBalance: '$ 60,007.74',
+    gain: '$ 58,508.93',
   },
 ];
 
