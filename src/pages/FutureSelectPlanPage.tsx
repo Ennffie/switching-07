@@ -80,7 +80,7 @@ const FutureSelectPlanPage = () => {
                   <div className="text-[15px] text-[#888] mb-2">帳戶結餘（港幣）</div>
                   <div className="text-[20px] font-semibold">{acc.balance}</div>
                 </div>
-                <div className="text-[18px] underline">帳戶詳情</div>
+                <div className="text-[16px] underline text-[#1F1F1F] mt-1">帳戶詳情</div>
               </div>
             </button>
           ))}
