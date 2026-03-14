@@ -36,7 +36,7 @@ const EnrolmentRiskLevelPage = () => {
           <span>最低風險</span>
           <span>最高風險</span>
         </div>
-        <div className="grid grid-cols-7 mb-8 overflow-hidden rounded-[2px] border border-[#E5E5E5]">
+        <div className="grid grid-cols-7 mb-8 max-w-[520px] overflow-hidden rounded-[2px] border border-[#E5E5E5]">
           {colors.map((c, i) => (
             <div key={i} className="h-[54px] text-white text-center flex flex-col items-center justify-center font-bold" style={{ backgroundColor: c }}>
               <div className="text-[13px]">級別</div>
@@ -46,7 +46,7 @@ const EnrolmentRiskLevelPage = () => {
         </div>
 
         <div className="border border-[#E5E5E5]">
-          <div className="grid grid-cols-[1.6fr_1fr_1fr] bg-[#F5A623] text-white text-[16px] font-medium">
+          <div className="grid grid-cols-[2.25fr_1fr_1fr] bg-[#F5A623] text-white text-[16px] font-medium">
             <div className="px-4 py-4 flex items-center border-r border-white/30">風險級別</div>
             <div className="col-span-2 text-center border-b border-white/30">
               <div className="px-4 pt-3 pb-2">基金風險標記</div>
@@ -57,7 +57,7 @@ const EnrolmentRiskLevelPage = () => {
             </div>
           </div>
           {rows.map((row, idx) => (
-            <div key={idx} className="grid grid-cols-[1.6fr_1fr_1fr] text-[15px] border-t border-[#EAEAEA] bg-white">
+            <div key={idx} className="grid grid-cols-[2.25fr_1fr_1fr] text-[15px] border-t border-[#EAEAEA] bg-white">
               <div className="px-4 py-4">{row[0]}</div>
               <div className="px-4 py-4 text-center border-l border-[#EAEAEA]">{row[1]}</div>
               <div className="px-4 py-4 text-center border-l border-[#EAEAEA]">{row[2]}</div>
