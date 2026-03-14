@@ -1,7 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 
-const accounts = [
+interface Account {
+  id: string;
+  logo: string;
+  name: string;
+  member: string;
+  date: string;
+  type: string;
+  balance: string;
+  mandatoryBalance?: string;
+  voluntaryBalance?: string;
+  gain?: string;
+}
+
+const accounts: Account[] = [
   {
     id: '1',
     logo: './icons/aia-logo-new.jpg',
@@ -10,6 +24,9 @@ const accounts = [
     date: '29/12/2023',
     type: '一般僱員',
     balance: '$ 128,396.91',
+    mandatoryBalance: '$ 68,389.17',
+    voluntaryBalance: '$ 60,007.74',
+    gain: '$ 58,508.93',
   },
   {
     id: '2',
@@ -19,17 +36,32 @@ const accounts = [
     date: '26/01/2011',
     type: '一般僱員',
     balance: '$ 44,905.94',
+    mandatoryBalance: '$ 22,452.97',
+    voluntaryBalance: '$ 22,452.97',
+    gain: '$ 33,109.71',
   },
 ];
 
 const FutureSelectPlanPage = () => {
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [detailAccountId, setDetailAccountId] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalAccount, setModalAccount] = useState<Account | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleOpenModal = (e: React.MouseEvent, acc: Account) => {
+    e.stopPropagation();
+    setModalAccount(acc);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setModalAccount(null);
+  };
 
   return (
     <div className="min-h-screen bg-[#F8F5FA]">
@@ -59,7 +91,7 @@ const FutureSelectPlanPage = () => {
         <h2 className="text-[24px] font-bold text-[#E6A23C] mb-4">選擇計劃及帳戶</h2>
         <p className="text-[18px] leading-[1.6] text-[#1F1F1F] mb-8">請選擇你想要更改投資授權的強積金帳戶。</p>
 
-        <div className="space-y-5">
+        <div className="space-y-6">
           {accounts.map((acc) => (
             <button
               key={acc.id}
@@ -67,7 +99,7 @@ const FutureSelectPlanPage = () => {
               className={`w-full text-left bg-white rounded-[24px] border shadow-[0_8px_24px_rgba(0,0,0,0.08)] px-6 pt-6 pb-6 min-h-[336px] ${selectedId === acc.id ? 'border-[3px] border-[#E6A23C]' : 'border border-[#D8D3D3]'}`}
             >
               <div className="flex justify-center mb-5">
-                <img src={acc.logo} alt={acc.name} className="h-[50px] object-contain" onError={(e) => { e.currentTarget.style.display = "none"; }} />
+                <img src={acc.logo} alt={acc.name} className="h-[50px] object-contain" />
               </div>
               <div className="text-center text-[19px] font-semibold text-[#1F1F1F] leading-[1.5] mb-3">{acc.name}</div>
               <div className="text-center text-[14px] text-[#777] mb-5">自{acc.date} | 成員帳戶號碼： {acc.member}</div>
@@ -81,7 +113,7 @@ const FutureSelectPlanPage = () => {
                   <div className="text-[15px] text-[#888] mb-2">帳戶結餘（港幣）</div>
                   <div className="text-[20px] font-semibold">{acc.balance}</div>
                 </div>
-                <button onClick={(e) => { e.stopPropagation(); setDetailAccountId(acc.id); }} className="text-[16px] underline text-[#1F1F1F] mt-1">帳戶詳情</button>
+                <button onClick={(e) => handleOpenModal(e, acc)} className="text-[16px] underline text-[#1F1F1F] mt-1">帳戶詳情</button>
               </div>
             </button>
           ))}
@@ -89,41 +121,50 @@ const FutureSelectPlanPage = () => {
       </div>
 
       <div className="fixed left-0 right-0 bottom-0 bg-white border-t border-[#E9E5E5] px-6 pt-4 pb-6 shadow-[0_-2px_8px_rgba(0,0,0,0.03)]">
-        <button className={`w-full h-[58px] rounded-full text-[19px] font-semibold ${selectedId === '1' ? 'bg-[#19345B] text-white' : 'bg-[#ECE8EC] text-[#B7B3B3]'}`}>
+        <button className={`w-full h-[58px] rounded-full text-[20px] font-semibold ${selectedId === '1' ? 'bg-[#19345B] text-white' : 'bg-[#ECE8EC] text-[#B7B3B3]'}`}>
           下一步
         </button>
       </div>
 
-      {detailAccountId && (
-        <div className="fixed inset-0 z-40 flex items-end">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setDetailAccountId(null)} />
-          <div className="relative w-full bg-white rounded-t-[28px] px-6 pt-6 pb-8 shadow-[0_-8px_24px_rgba(0,0,0,0.16)]">
-            <div className="flex justify-end mb-3">
-              <button onClick={() => setDetailAccountId(null)} className="text-[30px] leading-none text-[#1F1F1F]">×</button>
+      {showModal && modalAccount && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50" onClick={handleCloseModal} />
+          <div className="relative bg-white rounded-2xl w-full max-w-sm p-6">
+            <button onClick={handleCloseModal} className="absolute top-4 right-4 text-gray-500">
+              <X size={24} />
+            </button>
+            <h2 className="text-xl font-bold text-[#E67E22] text-center mb-6">帳戶詳情</h2>
+            <div className="flex justify-center mb-4">
+              <img src={modalAccount.logo} alt={modalAccount.name} className="w-16 h-16 object-contain" />
             </div>
-            <div className="text-[24px] font-semibold text-[#E6A23C] mb-6">帳戶詳情</div>
-            <div className="space-y-6 text-[#1F1F1F]">
+            <h3 className="text-xl font-bold text-gray-900 text-center mb-2">{modalAccount.name}</h3>
+            <p className="text-base text-gray-500 text-center mb-6">自 {modalAccount.date} | 成員帳戶號碼： {modalAccount.member}</p>
+            <div className="space-y-4">
               <div>
-                <div className="text-[15px] text-[#888] mb-2">計劃</div>
-                <div className="text-[19px] leading-[1.5]">{accounts.find(a => a.id === detailAccountId)?.name}</div>
+                <p className="text-base text-gray-500 mb-1">帳戶類別</p>
+                <p className="text-lg font-medium text-gray-900">{modalAccount.type}</p>
               </div>
               <div>
-                <div className="text-[15px] text-[#888] mb-2">成員帳戶號碼</div>
-                <div className="text-[19px]">{accounts.find(a => a.id === detailAccountId)?.member}</div>
+                <p className="text-base text-gray-500 mb-1">強制性供款結餘（港幣）</p>
+                <p className="text-lg font-medium text-gray-900">{modalAccount.mandatoryBalance}</p>
               </div>
               <div>
-                <div className="text-[15px] text-[#888] mb-2">帳戶類別</div>
-                <div className="text-[19px]">{accounts.find(a => a.id === detailAccountId)?.type}</div>
+                <p className="text-base text-gray-500 mb-1">自願性供款結餘（港幣）</p>
+                <p className="text-lg font-medium text-gray-900">{modalAccount.voluntaryBalance}</p>
               </div>
               <div>
-                <div className="text-[15px] text-[#888] mb-2">帳戶結餘（港幣）</div>
-                <div className="text-[19px]">{accounts.find(a => a.id === detailAccountId)?.balance}</div>
+                <p className="text-base text-gray-500 mb-1">投資收益（虧損）（港幣）</p>
+                <p className="text-lg font-medium text-gray-900">{modalAccount.gain}</p>
+              </div>
+              <div>
+                <p className="text-base text-gray-500 mb-1">帳戶結餘（港幣）</p>
+                <p className="text-lg font-medium text-gray-900">{modalAccount.balance}</p>
               </div>
             </div>
+            <p className="text-sm text-gray-400 text-right mt-4">截至 05/03/2026</p>
           </div>
         </div>
       )}
-
     </div>
   );
 };
