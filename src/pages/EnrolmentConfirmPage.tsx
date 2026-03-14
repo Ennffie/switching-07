@@ -11,11 +11,11 @@ const SectionHeader = ({ title }: { title: string }) => (
   </div>
 );
 
-const EditRow = () => (
-  <div className="flex items-center justify-center gap-3 py-5 border-t border-[#EAE6E6] bg-white text-[#1F1F1F]">
-    <img src="./icons/icon-edit.png" alt="編輯" className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = "none"; }} /><span className="text-[#1F1F1F] text-[20px] leading-none">✎</span>
+const EditRow = ({ onClick }: { onClick: () => void }) => (
+  <button onClick={onClick} className="flex w-full items-center justify-center gap-3 py-5 border-t border-[#EAE6E6] bg-white text-[#1F1F1F]">
+    <img src="./icons/icon-edit.png" alt="編輯" className="w-6 h-6 object-contain" />
     <span className="text-[18px] font-medium">編輯</span>
-  </div>
+  </button>
 );
 
 const LabelValue = ({ label, value }: { label: string; value: string }) => (
@@ -86,14 +86,14 @@ const EnrolmentConfirmPage = () => {
           <LabelValue label="職位" value="行政和商業經理" />
         </div>
       </div>
-      <EditRow />
+      <EditRow onClick={() => navigate('/enrolment-step-1')} />
 
       <SectionHeader title="聯絡資料" />
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
         <LabelValue label="電郵地址" value="wong.kaming89@gmail.com" />
         <LabelValue label="手機號碼" value="+852 96823451" />
       </div>
-      <EditRow />
+      <EditRow onClick={() => navigate('/enrolment-personal-info')} />
 
       <SectionHeader title="地址" />
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
@@ -115,19 +115,19 @@ const EnrolmentConfirmPage = () => {
         <LabelValue label="街道（街號及街道名稱）" value="海怡路 8號" />
         <LabelValue label="區域" value="鴨脷洲" />
       </div>
-      <EditRow />
+      <EditRow onClick={() => navigate('/enrolment-personal-info')} />
 
       <SectionHeader title="通訊方式" />
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
         <LabelValue label="積金易平台有限公司直接促銷同意書：閣下同意積金易平台有限公司根據其收集個人資料聲明（eMPF.org.hk/pics）內的「直接促銷」部分，使用閣下的個人資料作直接促銷之用途。閣下在此作出之指示，將取代閣下先前可能已向積金易平台有限公司提供的任何有關選擇「直接促銷」的指示。" value="否" />
       </div>
-      <EditRow />
+      <EditRow onClick={() => navigate('/enrolment-personal-info')} />
 
       <SectionHeader title="共同匯報標準表格" />
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
         <LabelValue label="我的稅務居住地為" value="只有香港，及沒有處於任何其他司法管轄區／國家／地區的稅務居住地，而且本人的香港身分證號碼是本人的稅務編號" />
       </div>
-      <EditRow />
+      <EditRow onClick={() => navigate('/enrolment-personal-info')} />
 
       <div className="text-[18px] font-semibold text-[#1F1F1F] px-6 mt-8 mb-3">第3步：投資選擇</div>
       <SectionHeader title="投資選擇" />
@@ -136,7 +136,7 @@ const EnrolmentConfirmPage = () => {
         <LabelValue label="僱員強制性供款分配" value="海通強積金保守基金                    50%\n\n海通65歲後基金                    50%" />
         <LabelValue label="僱員自願性供款分配" value="海通強積金保守基金                    20%\n\n海通65歲後基金                    20%\n\n海通核心累積基金                    60%" />
       </div>
-      <EditRow />
+      <EditRow onClick={() => navigate('/enrolment-personal-info')} />
 
       <div className="bg-white mt-8 px-6 pt-8 pb-12">
         <div className="text-[22px] font-semibold text-[#1F1F1F] mb-8">強積金註冊中介人資料（如適用）</div>
