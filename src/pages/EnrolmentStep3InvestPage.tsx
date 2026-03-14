@@ -49,15 +49,29 @@ const allInFunds: Fund[] = [
 
 const EnrolmentStep3InvestPage = () => {
   const navigate = useNavigate();
-  const { setMandatoryFunds: setConfirmMandatoryFunds, setVoluntaryFunds: setConfirmVoluntaryFunds } = useEnrolment();
+  const {
+    mandatoryFunds: savedMandatoryFunds,
+    voluntaryFunds: savedVoluntaryFunds,
+    setMandatoryFunds: setConfirmMandatoryFunds,
+    setVoluntaryFunds: setConfirmVoluntaryFunds
+  } = useEnrolment();
   const [contributionType, setContributionType] = useState<ContributionType>('mandatory');
-  const [mandatoryFunds, setMandatoryFunds] = useState<Fund[]>(allInFunds);
-  const [voluntaryFunds, setVoluntaryFunds] = useState<Fund[]>(allInFunds);
+  const [mandatoryFunds, setMandatoryFunds] = useState<Fund[]>(() => allInFunds.map(f => { const saved = savedMandatoryFunds.find(sf => sf.name === f.name); return saved ? { ...f, allocation: saved.allocation } : f; }));
+  const [voluntaryFunds, setVoluntaryFunds] = useState<Fund[]>(() => allInFunds.map(f => { const saved = savedVoluntaryFunds.find(sf => sf.name === f.name); return saved ? { ...f, allocation: saved.allocation } : f; }));
   const [showKeypad, setShowKeypad] = useState(false);
   const [activeFundId, setActiveFundId] = useState<string | null>(null);
   const [keypadValue, setKeypadValue] = useState('');
 
   useEffect(() => { window.scrollTo(0,0); }, []);
+
+  useEffect(() => {
+    if (savedMandatoryFunds.length > 0) {
+      setMandatoryFunds(allInFunds.map(f => { const saved = savedMandatoryFunds.find(sf => sf.name === f.name); return saved ? { ...f, allocation: saved.allocation } : { ...f, allocation: 0 }; }));
+    }
+    if (savedVoluntaryFunds.length > 0) {
+      setVoluntaryFunds(allInFunds.map(f => { const saved = savedVoluntaryFunds.find(sf => sf.name === f.name); return saved ? { ...f, allocation: saved.allocation } : { ...f, allocation: 0 }; }));
+    }
+  }, [savedMandatoryFunds, savedVoluntaryFunds]);
 
   const currentFunds = contributionType === 'mandatory' ? mandatoryFunds : voluntaryFunds;
   const mandatoryTotal = useMemo(() => mandatoryFunds.reduce((sum, f) => sum + f.allocation, 0), [mandatoryFunds]);
