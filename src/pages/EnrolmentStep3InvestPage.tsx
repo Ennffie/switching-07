@@ -163,7 +163,7 @@ const EnrolmentStep3InvestPage = () => {
             {contributionType === 'mandatory' && <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-[#F5A623] rounded-full" />}
           </button>
           <button onClick={() => setContributionType('voluntary')} className={`flex-1 pb-3 text-[16px] font-medium relative ${contributionType === 'voluntary' ? 'text-[#E6A23C]' : 'text-[#B1AEAE]'}`}>
-            僱主自願性供款分配
+            僱員自願性供款分配
             {contributionType === 'voluntary' && <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-[#F5A623] rounded-full" />}
           </button>
         </div>
@@ -210,7 +210,6 @@ const EnrolmentStep3InvestPage = () => {
           <span className={`text-[20px] font-bold ${total === 100 ? 'text-[#E39118]' : 'text-[#D62828]'}`}>{total}%</span>
         </div>
         <button onClick={() => { if (!isNextEnabled) return; setConfirmMandatoryFunds(mandatoryFunds.filter(f => f.allocation > 0).map(f => ({ name: f.name, allocation: f.allocation }))); setConfirmVoluntaryFunds(voluntaryFunds.filter(f => f.allocation > 0).map(f => ({ name: f.name, allocation: f.allocation }))); navigate('/enrolment-confirm'); }} className={`w-full h-[58px] rounded-full text-[19px] font-semibold mb-4 ${isNextEnabled ? 'bg-[#19345B] text-white' : 'bg-[#E6E3E3] text-[#B8B4B4]'}`}>下一步</button>
-        <div className="text-center text-[18px] text-[#9A9696]">新增指示</div>
       </div>
 
       {showKeypad && (
