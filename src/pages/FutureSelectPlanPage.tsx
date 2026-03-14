@@ -106,7 +106,7 @@ const FutureSelectPlanPage = () => {
 
               <div className="flex items-center justify-center gap-3 mb-7 text-[#1F1F1F]">
                 <BriefcaseBusiness size={22} className="text-[#1F1F1F]" />
-                <span className="text-[18px] font-medium">實運有限公司</span>
+                <span className="text-[18px] font-medium">{acc.id === '1' ? '實運有限公司' : '德信工程有限公司'}</span>
               </div>
 
               <div className="space-y-5 text-[#1F1F1F]">
