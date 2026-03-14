@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const accounts = [
   {
     id: '1',
-    logo: './images/logo-aia.png',
+    logo: './logos/aia-logo.png',
     name: '友邦強積金優選計劃',
     member: '56442131',
     date: '29/12/2023',
@@ -13,7 +13,7 @@ const accounts = [
   },
   {
     id: '2',
-    logo: './images/logo-manulife.png',
+    logo: './logos/manulife-logo.png',
     name: '宏利環球精選（強積金）計劃',
     member: '29819644',
     date: '26/01/2011',
