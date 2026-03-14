@@ -49,8 +49,8 @@ const allInFunds: Fund[] = [
 const EnrolmentStep3InvestPage = () => {
   const navigate = useNavigate();
   const [contributionType, setContributionType] = useState<ContributionType>('mandatory');
-  const [mandatoryFunds] = useState<Fund[]>(allInFunds);
-  const [voluntaryFunds] = useState<Fund[]>(allInFunds);
+  const [mandatoryFunds, setMandatoryFunds] = useState<Fund[]>(allInFunds);
+  const [voluntaryFunds, setVoluntaryFunds] = useState<Fund[]>(allInFunds);
 
   useEffect(() => { window.scrollTo(0,0); }, []);
 
@@ -59,6 +59,14 @@ const EnrolmentStep3InvestPage = () => {
   const voluntaryTotal = useMemo(() => voluntaryFunds.reduce((sum, f) => sum + f.allocation, 0), [voluntaryFunds]);
   const total = contributionType === 'mandatory' ? mandatoryTotal : voluntaryTotal;
   const isNextEnabled = mandatoryTotal === 100 && voluntaryTotal === 100;
+
+  const updateAllocation = (id: string, value: string) => {
+    const cleaned = value.replace(/[^0-9]/g, '');
+    const parsed = cleaned === '' ? 0 : Math.min(100, parseInt(cleaned, 10));
+    const updater = (funds: Fund[]) => funds.map(f => f.id === id ? { ...f, allocation: parsed } : f);
+    if (contributionType === 'mandatory') setMandatoryFunds(prev => updater(prev));
+    else setVoluntaryFunds(prev => updater(prev));
+  };
 
   return (
     <div className="min-h-screen bg-[#F6F5F4] flex flex-col">
@@ -127,7 +135,13 @@ const EnrolmentStep3InvestPage = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0 pl-2">
-                  <div className="w-[74px] h-[50px] rounded-[6px] border border-[#D7D3D3] bg-white flex items-center justify-center text-[20px] text-[#1F1F1F]">0</div>
+                  <input
+                    inputMode="numeric"
+                    value={fund.allocation === 0 ? '' : String(fund.allocation)}
+                    onChange={(e) => updateAllocation(fund.id, e.target.value)}
+                    className="w-[74px] h-[50px] rounded-[6px] border border-[#D7D3D3] bg-white text-center text-[20px] text-[#1F1F1F] outline-none"
+                    placeholder="0"
+                  />
                   <span className="text-[18px] text-[#7A7777]">%</span>
                 </div>
               </div>
@@ -139,9 +153,9 @@ const EnrolmentStep3InvestPage = () => {
       <div className="sticky bottom-0 bg-white px-6 pt-4 pb-6 border-t border-[#E9E5E5] shadow-[0_-2px_8px_rgba(0,0,0,0.03)]">
         <div className="flex justify-between items-center mb-2 text-[18px] font-medium">
           <span className="text-[#1F1F1F]">總和：</span>
-          <span className="text-[#E39118] text-[20px] font-bold">{total}%</span>
+          <span className={`text-[20px] font-bold ${total === 100 ? 'text-[#E39118]' : 'text-[#D62828]'}`}>{total}%</span>
         </div>
-        <button className={`w-full h-[58px] rounded-full text-[19px] font-semibold mb-4 ${isNextEnabled ? "bg-[#19345B] text-white" : "bg-[#E6E3E3] text-[#B8B4B4]"}`}>下一步</button>
+        <button className={`w-full h-[58px] rounded-full text-[19px] font-semibold mb-4 ${isNextEnabled ? 'bg-[#19345B] text-white' : 'bg-[#E6E3E3] text-[#B8B4B4]'}`}>下一步</button>
         <div className="text-center text-[18px] text-[#9A9696]">新增指示</div>
       </div>
     </div>
