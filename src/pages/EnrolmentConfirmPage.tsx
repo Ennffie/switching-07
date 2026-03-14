@@ -13,7 +13,7 @@ const SectionHeader = ({ title }: { title: string }) => (
 
 const EditRow = () => (
   <div className="flex items-center justify-center gap-3 py-5 border-t border-[#EAE6E6] bg-white text-[#1F1F1F]">
-    <img src="./icons/icon-edit.png" alt="編輯" className="w-6 h-6 object-contain" />
+    <img src="./icons/icon-edit.png" alt="編輯" className="w-6 h-6 object-contain" onError={(e) => { e.currentTarget.style.display = "none"; }} /><span className="text-[#1F1F1F] text-[20px] leading-none">✎</span>
     <span className="text-[18px] font-medium">編輯</span>
   </div>
 );
@@ -73,14 +73,14 @@ const EnrolmentConfirmPage = () => {
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
         <LabelValue label="稱謂" value="先生" />
         <div className="grid grid-cols-2 gap-x-8">
-          <LabelValue label="姓氏（英文）" value="LEE" />
-          <LabelValue label="名字（英文）" value="SIU MING" />
-          <LabelValue label="姓氏（中文）" value="李" />
-          <LabelValue label="名字（中文）" value="小明" />
+          <LabelValue label="姓氏（英文）" value="CHAN" />
+          <LabelValue label="名字（英文）" value="TAI MAN" />
+          <LabelValue label="姓氏（中文）" value="陳" />
+          <LabelValue label="名字（中文）" value="大文" />
         </div>
         <LabelValue label="身份證明文件類別" value="香港身份證" />
-        <LabelValue label="身分證明號碼" value="G5616009" />
-        <LabelValue label="出生日期（日／月／年）" value="15/06/2008" />
+        <LabelValue label="身分證明號碼" value="Y1234567" />
+        <LabelValue label="出生日期（日／月／年）" value="08/11/1992" />
         <div className="grid grid-cols-2 gap-x-8">
           <LabelValue label="性別" value="男性" />
           <LabelValue label="職位" value="行政和商業經理" />
@@ -90,8 +90,8 @@ const EnrolmentConfirmPage = () => {
 
       <SectionHeader title="聯絡資料" />
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
-        <LabelValue label="電郵地址" value="123@GMAIL.COM" />
-        <LabelValue label="手機號碼" value="+852 66666666" />
+        <LabelValue label="電郵地址" value="chan.taiman@gmail.com" />
+        <LabelValue label="手機號碼" value="+852 91234567" />
       </div>
       <EditRow />
 
@@ -102,8 +102,8 @@ const EnrolmentConfirmPage = () => {
         <LabelValue label="單位／室（例如：「2室」、「A室」）" value="1 不填寫（本項資料留空）" />
         <LabelValue label="層數（例如：「12樓」）" value="2 不填寫（本項資料留空）" />
         <LabelValue label="座（例如：「C座」）" value="3 不填寫（本項資料留空）" />
-        <LabelValue label="大廈" value="4" />
-        <LabelValue label="街道（街號及街道名稱）" value="5" />
+        <LabelValue label="大廈" value="康景花園A座 12樓 B室" />
+        <LabelValue label="街道（街號及街道名稱）" value="卑路乍街 28號" />
         <LabelValue label="區域" value="堅尼地城" />
 
         <div className="text-[22px] font-semibold text-[#1F1F1F] mb-8 mt-12">通訊地址</div>
@@ -111,8 +111,8 @@ const EnrolmentConfirmPage = () => {
         <LabelValue label="單位／室（例如：「2室」、「A室」）" value="1 不填寫（本項資料留空）" />
         <LabelValue label="層數（例如：「12樓」）" value="2 不填寫（本項資料留空）" />
         <LabelValue label="座（例如：「C座」）" value="3 不填寫（本項資料留空）" />
-        <LabelValue label="大廈" value="4" />
-        <LabelValue label="街道（街號及街道名稱）" value="5" />
+        <LabelValue label="大廈" value="康景花園A座 12樓 B室" />
+        <LabelValue label="街道（街號及街道名稱）" value="卑路乍街 28號" />
         <LabelValue label="區域" value="堅尼地城" />
       </div>
       <EditRow />
