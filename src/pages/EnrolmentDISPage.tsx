@@ -18,7 +18,7 @@ const EnrolmentDISPage = () => {
         <p className="text-[18px] leading-[1.6] text-[#1F1F1F]">
           有關預設投資策略的詳情，請參閱
           <a
-            href="https://www.mpfa.org.hk/tc/mpf-system/default-investment-strategy"
+            href="https://www.mpfa.org.hk/mpf-investment/portfolio/default-investment-strategy"
             target="_blank"
             rel="noopener noreferrer"
             className="underline font-semibold"
