@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEnrolment } from '../context/EnrolmentContext';
 
 const SectionHeader = ({ title }: { title: string }) => (
   <div className="flex items-center justify-between px-6 py-5 border-y border-[#E8E4E4] bg-white">
@@ -28,6 +29,7 @@ const LabelValue = ({ label, value }: { label: string; value: string }) => (
 const EnrolmentConfirmPage = () => {
   const navigate = useNavigate();
   const [intermediary, setIntermediary] = useState<'yes' | 'no' | null>('no');
+  const { mandatoryFunds, voluntaryFunds } = useEnrolment();
 
   const submitEnabled = intermediary !== null;
 
@@ -132,11 +134,31 @@ const EnrolmentConfirmPage = () => {
       <div className="text-[18px] font-semibold text-[#1F1F1F] px-6 mt-8 mb-3">第3步：投資選擇</div>
       <SectionHeader title="投資選擇" />
       <div className="bg-white px-6 pt-8 pb-2 border-b border-[#EAE6E6]">
-        <LabelValue label="僱主強制性供款分配" value="海通強積金保守基金                    100%" />
-        <LabelValue label="僱員強制性供款分配" value="海通強積金保守基金                    50%\n\n海通65歲後基金                    50%" />
-        <LabelValue label="僱員自願性供款分配" value="海通強積金保守基金                    20%\n\n海通65歲後基金                    20%\n\n海通核心累積基金                    60%" />
+        <div className="mb-10">
+          <div className="text-[19px] font-semibold text-[#1F1F1F] mb-4">僱主強制性供款分配</div>
+          <div className="space-y-4 text-[19px] text-[#1F1F1F]">
+            {mandatoryFunds.length > 0 ? mandatoryFunds.map((fund) => (
+              <div key={`m-${fund.name}`} className="flex justify-between items-start gap-4">
+                <div className="leading-[1.5]">{fund.name}</div>
+                <div className="font-medium">{fund.allocation}%</div>
+              </div>
+            )) : <div className="text-[#7E7A7A]">未有資料</div>}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <div className="text-[19px] font-semibold text-[#1F1F1F] mb-4">僱員自願性供款分配</div>
+          <div className="space-y-4 text-[19px] text-[#1F1F1F]">
+            {voluntaryFunds.length > 0 ? voluntaryFunds.map((fund) => (
+              <div key={`v-${fund.name}`} className="flex justify-between items-start gap-4">
+                <div className="leading-[1.5]">{fund.name}</div>
+                <div className="font-medium">{fund.allocation}%</div>
+              </div>
+            )) : <div className="text-[#7E7A7A]">未有資料</div>}
+          </div>
+        </div>
       </div>
-      <EditRow onClick={() => navigate('/enrolment-personal-info')} />
+      <EditRow onClick={() => navigate('/enrolment-step-3-invest')} />
 
       <div className="bg-white mt-8 px-6 pt-8 pb-12">
         <div className="text-[22px] font-semibold text-[#1F1F1F] mb-8">強積金註冊中介人資料（如適用）</div>

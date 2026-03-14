@@ -1,6 +1,7 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { TransferProvider } from './context/TransferContext';
+import { EnrolmentProvider } from './context/EnrolmentContext';
 import MyMPFPage from './pages/MyMPFPage';
 import OverviewPage from './pages/OverviewPage';
 import InvestPage from './pages/InvestPage';
@@ -28,6 +29,7 @@ import EnrolmentIdentityPage from './pages/EnrolmentIdentityPage';
 function App() {
   return (
     <TransferProvider>
+      <EnrolmentProvider>
       <Router>
         <Routes>
           <Route path="/" element={<OverviewPage />} />
@@ -55,6 +57,7 @@ function App() {
           <Route path="/quiz/room-cleanliness" element={<RoomCleanlinessQuizPage />} />
         </Routes>
       </Router>
+      </EnrolmentProvider>
     </TransferProvider>
   );
 }
