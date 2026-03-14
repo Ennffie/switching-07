@@ -23,6 +23,7 @@ import EnrolmentPersonalInfoPage from './pages/EnrolmentPersonalInfoPage';
 import EnrolmentStep3InvestPage from './pages/EnrolmentStep3InvestPage';
 import EnrolmentTermsPage from './pages/EnrolmentTermsPage';
 import EnrolmentConfirmPage from './pages/EnrolmentConfirmPage';
+import EnrolmentSubmittedPage from './pages/EnrolmentSubmittedPage';
 import EnrolmentIAMSmartPage from './pages/EnrolmentIAMSmartPage';
 import EnrolmentIdentityPage from './pages/EnrolmentIdentityPage';
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/enrolment-personal-info" element={<EnrolmentPersonalInfoPage />} />
           <Route path="/enrolment-step-3-invest" element={<EnrolmentStep3InvestPage />} />
           <Route path="/enrolment-terms" element={<EnrolmentTermsPage />} />
+            <Route path="/enrolment-submitted" element={<EnrolmentSubmittedPage />} />
           <Route path="/enrolment-confirm" element={<EnrolmentConfirmPage />} />
           <Route path="/quiz/personality" element={<PersonalityQuizPage />} />
           <Route path="/quiz/work-life" element={<WorkLifeQuizPage />} />

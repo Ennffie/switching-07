@@ -220,7 +220,7 @@ const EnrolmentTermsPage = () => {
       {/* Bottom Buttons */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-4 z-40">
         <button 
-          onClick={() => setShowModal(true)}
+          onClick={() => navigate('/enrolment-submitted')}
           disabled={!canAccept}
           className={`w-full py-4 rounded-full text-lg font-medium mb-3 transition-all ${
             canAccept 
