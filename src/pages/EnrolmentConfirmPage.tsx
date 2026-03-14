@@ -64,8 +64,8 @@ const EnrolmentConfirmPage = () => {
       <div className="text-[18px] font-semibold text-[#1F1F1F] px-6 mb-3">第1步：選擇計劃</div>
       <SectionHeader title="選擇計劃" />
       <div className="bg-white px-6 pt-8 pb-8 border-b border-[#EAE6E6]">
-        <div className="text-[20px] font-semibold text-[#1F1F1F] mb-2">海通 MPF 退休金</div>
-        <div className="text-[18px] leading-[1.45] text-[#6F6C6C]">HSBC Provident Fund Trustee (Hong Kong) Limited</div>
+        <div className="text-[20px] font-semibold text-[#1F1F1F] mb-2">宏利 MPF 退休金</div>
+        <div className="text-[18px] leading-[1.45] text-[#6F6C6C]">Manulife Provident Funds Trust Company Limited</div>
       </div>
 
       <div className="text-[18px] font-semibold text-[#1F1F1F] px-6 mt-8 mb-3">第2步：個人資料</div>
