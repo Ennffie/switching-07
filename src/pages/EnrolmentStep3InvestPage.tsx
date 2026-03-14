@@ -157,8 +157,11 @@ const EnrolmentStep3InvestPage = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0 pl-2">
-                  <button onClick={() => openKeypad(fund.id, fund.allocation)} className="w-[74px] h-[50px] rounded-[6px] border border-[#D7D3D3] bg-white text-center text-[20px] text-[#1F1F1F] outline-none">
-                    {fund.allocation || 0}
+                  <button onClick={() => openKeypad(fund.id, fund.allocation)} className={`w-[74px] h-[50px] rounded-[6px] border bg-white text-center text-[20px] text-[#1F1F1F] outline-none flex items-center justify-center ${activeFundId === fund.id && showKeypad ? 'border-[#F5A623]' : 'border-[#D7D3D3]'}`}>
+                    <span className="relative inline-flex items-center justify-center min-w-[12px]">
+                      <span>{fund.allocation || 0}</span>
+                      {activeFundId === fund.id && showKeypad && <span className="ml-[2px] inline-block w-[1.5px] h-[22px] bg-[#1F1F1F] animate-pulse" />}
+                    </span>
                   </button>
                   <span className="text-[18px] text-[#7A7777]">%</span>
                 </div>
@@ -197,7 +200,7 @@ const EnrolmentStep3InvestPage = () => {
                 <span className="text-[18px] leading-none text-black">0</span>
               </button>
               <button onClick={handleKeypadDelete} className="h-[58px] rounded-[6px] bg-[#D1D5DB] flex items-center justify-center">
-                <span className="text-[22px] leading-none text-black">⌫</span>
+                <span className="inline-flex items-center justify-center w-[28px] h-[20px] border-[1.5px] border-black rounded-[6px] text-[14px] leading-none text-black">⌫</span>
               </button>
             </div>
           </div>
