@@ -24,6 +24,7 @@ const riskColors: Record<number, string> = {
   7: 'bg-red-500',
 };
 
+// Flow 1「轉入」基金列表
 const fullFunds: Fund[] = [
   { id: 'in1', name: '預設投資策略', balance: 0, allocation: 0, riskLevel: 4 },
   { id: 'in2', name: '友邦強積金優選計劃 - 保證組合', balance: 0, allocation: 0, riskLevel: 1 },
@@ -165,7 +166,7 @@ const FutureInvestPage = () => {
           <ul className="text-[13px] leading-6 text-gray-500 list-disc pl-5 space-y-1">
             <li>請確保投資分配總和為 100%。</li>
             <li>「預設投資策略」相關基金作為獨立投資選項時，風險降低機制並不適用。</li>
-            <li>基金資料、風險級別及說明均跟 Flow 1 顯示方式一致。</li>
+            <li>基金資料、風險級別及說明均直接跟 Flow 1「轉入」基金列表。</li>
           </ul>
         </div>
       </div>
