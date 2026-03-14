@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ExternalLink, Info, ArrowUpDown, RotateCcw } from 'lucide-react';
+import { ChevronLeft, ExternalLink, Info, ArrowUpDown, RotateCcw } from 'lucide-react';
+import StepBar from '../components/StepBar';
 
 interface Fund {
   id: string;
   name: string;
+  balance: number;
   allocation: number;
   riskLevel: number;
+  description?: string;
 }
 
-type ContributionType = 'employee-mandatory' | 'employer-voluntary';
+type ContributionType = 'employer-mandatory' | 'employee-mandatory';
 
 const riskColors: Record<number, string> = {
   1: 'bg-blue-500',
@@ -21,111 +24,160 @@ const riskColors: Record<number, string> = {
   7: 'bg-red-500',
 };
 
-const fundsBase: Fund[] = [
-  { id: '1', name: '預設投資策略', allocation: 0, riskLevel: 4 },
-  { id: '2', name: '信安港元儲蓄基金', allocation: 0, riskLevel: 1 },
-  { id: '3', name: '信安強積金保守基金', allocation: 0, riskLevel: 1 },
-  { id: '4', name: '信安65歲後基金', allocation: 0, riskLevel: 3 },
+const fullFunds: Fund[] = [
+  { id: 'in1', name: '預設投資策略', balance: 0, allocation: 0, riskLevel: 4 },
+  { id: 'in2', name: '友邦強積金優選計劃 - 保證組合', balance: 0, allocation: 0, riskLevel: 1 },
+  { id: 'in3', name: '友邦強積金優選計劃 - 強積金保守基金', balance: 0, allocation: 0, riskLevel: 1 },
+  { id: 'in4', name: '友邦強積金優選計劃 - 65歲後基金', balance: 0, allocation: 0, riskLevel: 3, description: '當65歲後基金或核心累積基金作為獨立投資選項，預設投資策略的風險降低機制並不適用' },
+  { id: 'in5', name: '友邦強積金優選計劃 - 亞洲債券基金', balance: 0, allocation: 0, riskLevel: 3 },
+  { id: 'in6', name: '友邦強積金優選計劃 - 均衡組合', balance: 0, allocation: 0, riskLevel: 4 },
+  { id: 'in7', name: '友邦強積金優選計劃 - 穩定資本組合', balance: 0, allocation: 0, riskLevel: 4 },
+  { id: 'in8', name: '友邦強積金優選計劃 - 環球債券基金', balance: 0, allocation: 0, riskLevel: 4 },
+  { id: 'in9', name: '友邦強積金優選計劃 - 中港動態資產配置基金', balance: 0, allocation: 0, riskLevel: 5 },
+  { id: 'in10', name: '友邦強積金優選計劃 - 核心累積基金', balance: 0, allocation: 0, riskLevel: 5, description: '當65歲後基金或核心累積基金作為獨立投資選項，預設投資策略的風險降低機制並不適用' },
+  { id: 'in11', name: '友邦強積金優選計劃 - 增長組合', balance: 0, allocation: 0, riskLevel: 5 },
+  { id: 'in12', name: '友邦強積金優選計劃 - 基金經理精選退休基金', balance: 0, allocation: 0, riskLevel: 5 },
+  { id: 'in13', name: '友邦強積金優選計劃 - 美洲基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in14', name: '友邦強積金優選計劃 - 亞洲股票基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in15', name: '友邦強積金優選計劃 - 亞歐基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in16', name: '友邦強積金優選計劃 - 歐洲股票基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in17', name: '友邦強積金優選計劃 - 大中華股票基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in18', name: '友邦強積金優選計劃 - 綠色退休基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in19', name: '友邦強積金優選計劃 - 中港基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in20', name: '友邦強積金優選計劃 - 北美股票基金', balance: 0, allocation: 0, riskLevel: 6 },
+  { id: 'in21', name: '友邦強積金優選計劃 - 全球基金', balance: 0, allocation: 0, riskLevel: 6 },
 ];
 
 const FutureInvestPage = () => {
   const navigate = useNavigate();
-  const [contributionType, setContributionType] = useState<ContributionType>('employee-mandatory');
-  const [employeeMandatoryFunds, setEmployeeMandatoryFunds] = useState<Fund[]>(fundsBase);
-  const [employerVoluntaryFunds, setEmployerVoluntaryFunds] = useState<Fund[]>(fundsBase);
+  const [contributionType, setContributionType] = useState<ContributionType>('employer-mandatory');
+  const [sortDirection, setSortDirection] = useState<'default' | 'riskAsc' | 'riskDesc'>('default');
+  const [employerMandatoryFunds, setEmployerMandatoryFunds] = useState<Fund[]>(fullFunds);
+  const [employeeMandatoryFunds, setEmployeeMandatoryFunds] = useState<Fund[]>(fullFunds);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const currentFunds = contributionType === 'employee-mandatory' ? employeeMandatoryFunds : employerVoluntaryFunds;
-  const total = useMemo(() => currentFunds.reduce((sum, f) => sum + f.allocation, 0), [currentFunds]);
+  const currentFunds = useMemo(() => {
+    const funds = contributionType === 'employer-mandatory' ? [...employerMandatoryFunds] : [...employeeMandatoryFunds];
+    const defaultFund = funds.find(f => f.name === '預設投資策略');
+    const others = funds.filter(f => f.name !== '預設投資策略');
+    if (sortDirection === 'riskAsc') others.sort((a, b) => a.riskLevel - b.riskLevel);
+    if (sortDirection === 'riskDesc') others.sort((a, b) => b.riskLevel - a.riskLevel);
+    return defaultFund ? [defaultFund, ...others] : others;
+  }, [contributionType, employerMandatoryFunds, employeeMandatoryFunds, sortDirection]);
+
+  const total = useMemo(() => {
+    const funds = contributionType === 'employer-mandatory' ? employerMandatoryFunds : employeeMandatoryFunds;
+    return funds.reduce((sum, f) => sum + f.allocation, 0);
+  }, [contributionType, employerMandatoryFunds, employeeMandatoryFunds]);
 
   const resetCurrentTab = () => {
-    const cleared = currentFunds.map(f => ({ ...f, allocation: 0 }));
-    if (contributionType === 'employee-mandatory') setEmployeeMandatoryFunds(cleared);
-    else setEmployerVoluntaryFunds(cleared);
+    const cleared = fullFunds.map(f => ({ ...f, allocation: 0 }));
+    if (contributionType === 'employer-mandatory') setEmployerMandatoryFunds(cleared);
+    else setEmployeeMandatoryFunds(cleared);
+    setSortDirection('default');
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F5F4] flex flex-col">
-      <div className="sticky top-0 z-20 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
-        <div className="px-4 pt-4 pb-4 flex items-center justify-center relative border-b border-[#ECECEC]">
-          <button onClick={() => navigate(-1)} className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center">
-            <img src="./icons/icon-back.png" alt="返回" className="w-6 h-6 object-contain" />
+    <div className="min-h-screen bg-[#f5f5f5] flex flex-col">
+      <div className="sticky top-0 z-50 bg-white">
+        <div className="px-4 py-3 flex items-center border-b border-gray-200">
+          <button onClick={() => navigate(-1)} className="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors">
+            <ChevronLeft size={24} className="text-gray-700" />
           </button>
-          <h1 className="text-[18px] font-semibold text-[#1F1F1F]">未來供款的投資</h1>
+          <h1 className="flex-1 text-center text-base font-medium text-gray-900">未來供款的投資</h1>
+          <div className="w-10" />
         </div>
+        <StepBar currentStep={2} />
+      </div>
 
-        <div className="px-6 pt-4 pb-4 bg-white">
-          <div className="flex items-center justify-between relative">
-            <div className="absolute top-[18px] left-[40px] right-[40px] h-[2px] bg-[#E6E3E3]" />
-            {['✓','2','3'].map((n, i) => (
-              <div key={i} className="relative z-10 flex flex-col items-center">
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-[20px] font-bold ${i < 2 ? 'bg-[#F5A623] text-white shadow-[0_2px_4px_rgba(0,0,0,0.12)]' : 'bg-[#F3F0F3] text-[#B7B3B3]'}`}>
-                  <span className="text-[20px] leading-none">{n}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="bg-white px-4 py-3">
+        <h2 className="text-[22px] font-bold text-[#E67E22]">未來供款的投資</h2>
+      </div>
+
+      <div className="bg-white px-4 border-b border-gray-200">
+        <div className="flex">
+          <button
+            onClick={() => setContributionType('employer-mandatory')}
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${contributionType === 'employer-mandatory' ? 'text-[#E67E22] border-[#E67E22]' : 'text-gray-500 border-transparent'}`}
+          >
+            僱主強制性供款（港幣）
+          </button>
+          <button
+            onClick={() => setContributionType('employee-mandatory')}
+            className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${contributionType === 'employee-mandatory' ? 'text-[#E67E22] border-[#E67E22]' : 'text-gray-500 border-transparent'}`}
+          >
+            僱員強制性供款（港元）
+          </button>
         </div>
       </div>
 
-      <div className="px-6 pt-8 pb-40 flex-1">
-        <h2 className="text-[24px] font-bold text-[#E6A23C] mb-6">未來供款的投資</h2>
+      <div className="bg-white px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+        <button
+          onClick={() => setSortDirection(prev => prev === 'default' ? 'riskAsc' : prev === 'riskAsc' ? 'riskDesc' : 'default')}
+          className="flex items-center gap-2 text-[15px] text-gray-700"
+        >
+          <ArrowUpDown size={18} />
+          <span>排序</span>
+        </button>
+        <button onClick={resetCurrentTab} className="flex items-center gap-2 text-[15px] text-gray-700">
+          <RotateCcw size={18} />
+          <span>重設</span>
+        </button>
+      </div>
 
-        <div className="flex border-b border-[#E4E0E0] mb-4 overflow-hidden">
-          <button onClick={() => setContributionType('employee-mandatory')} className={`flex-1 pb-3 text-[16px] font-medium relative ${contributionType === 'employee-mandatory' ? 'text-[#E6A23C]' : 'text-[#B1AEAE]'}`}>
-            僱主強制性供款（港幣）
-            {contributionType === 'employee-mandatory' && <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-[#F5A623] rounded-full" />}
-          </button>
-          <button onClick={() => setContributionType('employer-voluntary')} className={`flex-1 pb-3 text-[16px] font-medium relative ${contributionType === 'employer-voluntary' ? 'text-[#E6A23C]' : 'text-[#B1AEAE]'}`}>
-            僱員強制性供款（港元）
-            {contributionType === 'employer-voluntary' && <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-[#F5A623] rounded-full" />}
-          </button>
-        </div>
-
-        <div className="flex items-center justify-between mb-5">
-          <button className="flex items-center gap-2 text-[#1F1F1F]">
-            <ArrowUpDown size={20} />
-            <span className="text-[17px] font-medium">排序</span>
-          </button>
-          <button onClick={resetCurrentTab} className="flex items-center gap-2 text-[#1F1F1F]">
-            <RotateCcw size={20} />
-            <span className="text-[17px] font-medium">重設</span>
-          </button>
-        </div>
-
-        <div className="space-y-4">
-          {currentFunds.map((fund) => (
-            <div key={fund.id} className="bg-white border border-[#E2DEDE] rounded-[18px] px-5 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start gap-2 mb-3">
-                    <div className="text-[18px] leading-[1.45] text-[#1F1F1F] font-medium break-words">{fund.name}</div>
-                    {fund.name === '預設投資策略' ? <Info size={18} strokeWidth={1.8} className="text-[#B9B5B5] mt-[2px] flex-shrink-0" /> : <ExternalLink size={18} strokeWidth={1.8} className="text-[#B9B5B5] mt-[2px] flex-shrink-0" />}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className={`w-[4px] h-[22px] rounded-full ${riskColors[fund.riskLevel]}`} />
-                    <span className="text-[16px] text-[#7B7878]">風險級別 {fund.riskLevel}</span>
-                  </div>
+      <div className="flex-1 px-4 pt-4 pb-44 space-y-3">
+        {currentFunds.map((fund) => (
+          <div key={fund.id} className="bg-white rounded-2xl p-4 border border-gray-200">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start gap-2 mb-2">
+                  <div className="text-[16px] leading-[1.5] text-gray-900 break-words">{fund.name}</div>
+                  {fund.name.includes('預設投資策略') ? (
+                    <Info size={18} className="text-gray-400 flex-shrink-0 mt-0.5" />
+                  ) : (
+                    <ExternalLink size={18} className="text-gray-400 flex-shrink-0 mt-0.5" />
+                  )}
                 </div>
-                <div className="flex items-center gap-2 flex-shrink-0 pl-2">
-                  <div className="w-[74px] h-[50px] rounded-[6px] border border-[#D7D3D3] bg-white text-center text-[20px] text-[#1F1F1F] flex items-center justify-center">0</div>
-                  <span className="text-[18px] text-[#7A7777]">%</span>
+
+                <div className="flex items-center gap-2 mb-3">
+                  <div className={`w-1.5 h-5 rounded-full ${riskColors[fund.riskLevel]}`} />
+                  <span className="text-[14px] text-gray-500">風險級別 {fund.riskLevel}</span>
                 </div>
+
+                {fund.description && (
+                  <p className="text-[13px] text-gray-500 leading-relaxed">{fund.description}</p>
+                )}
+              </div>
+
+              <div className="flex items-center gap-2 pl-2">
+                <div className="w-[72px] h-[44px] rounded-lg border border-gray-300 flex items-center justify-center text-[18px] text-gray-900 bg-white">0</div>
+                <span className="text-[18px] text-gray-500">%</span>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
+
+        <div className="pt-3">
+          <div className="text-[15px] font-medium text-gray-900 mb-2">注意事項</div>
+          <ul className="text-[13px] leading-6 text-gray-500 list-disc pl-5 space-y-1">
+            <li>請確保投資分配總和為 100%。</li>
+            <li>「預設投資策略」相關基金作為獨立投資選項時，風險降低機制並不適用。</li>
+            <li>基金資料、風險級別及說明均跟 Flow 1 顯示方式一致。</li>
+          </ul>
         </div>
       </div>
 
-      <div className="fixed left-0 right-0 bottom-0 z-20 bg-white px-6 pt-4 pb-6 border-t border-[#E9E5E5] shadow-[0_-2px_8px_rgba(0,0,0,0.03)]">
-        <div className="flex justify-between items-center mb-2 text-[18px] font-medium">
-          <span className="text-[#1F1F1F]">總和：</span>
-          <span className="text-[20px] font-bold text-[#D62828]">{total}%</span>
+      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200 z-30">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[16px] text-gray-900">總和</span>
+          <span className={`text-[20px] font-bold ${total === 100 ? 'text-gray-900' : 'text-red-600'}`}>{total}%</span>
         </div>
-        <button className="w-full h-[58px] rounded-full bg-[#E6E3E3] text-[#B8B4B4] text-[19px] font-semibold">下一步</button>
+        <button className={`w-full py-3 rounded-lg text-base font-medium transition-all ${total === 100 ? 'bg-[#1e3a5f] text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
+          下一步
+        </button>
       </div>
     </div>
   );
