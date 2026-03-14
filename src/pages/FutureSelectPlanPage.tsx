@@ -4,21 +4,21 @@ import { useNavigate } from 'react-router-dom';
 const accounts = [
   {
     id: '1',
-    logo: './images/logo-chinalife.png',
-    name: '中國人壽強積金集成信託計劃',
-    member: '56457101',
-    date: '02/11/2024',
+    logo: './images/logo-aia.png',
+    name: '友邦強積金優選計劃',
+    member: '56442131',
+    date: '29/12/2023',
     type: '一般僱員',
-    balance: '$ 0',
+    balance: '$ 128,396.91',
   },
   {
     id: '2',
-    logo: './images/logo-aia.png',
-    name: '友邦強積金優選計劃',
-    member: '56505919',
-    date: '08/04/2026',
+    logo: './images/logo-manulife.png',
+    name: '宏利環球精選（強積金）計劃',
+    member: '29819644',
+    date: '26/01/2011',
     type: '一般僱員',
-    balance: '$ 0',
+    balance: '$ 44,905.94',
   },
 ];
 
@@ -70,11 +70,6 @@ const FutureSelectPlanPage = () => {
               </div>
               <div className="text-center text-[20px] font-semibold text-[#1F1F1F] leading-[1.5] mb-3">{acc.name}</div>
               <div className="text-center text-[15px] text-[#777] mb-8">自{acc.date} | 成員帳戶號碼： {acc.member}</div>
-
-              <div className="flex items-center justify-center gap-3 mb-8 text-[#1F1F1F]">
-                <img src="./icons/icon-briefcase.png" alt="帳戶" className="w-6 h-6 object-contain" />
-                <span className="text-[18px] font-medium">我和我</span>
-              </div>
 
               <div className="space-y-7 text-[#1F1F1F]">
                 <div>
