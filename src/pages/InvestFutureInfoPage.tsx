@@ -29,7 +29,7 @@ const InvestFutureInfoPage = () => {
         </ul>
 
         <div className="border border-[#DADADA] rounded-[20px] p-3">
-          <img src="./images/future-contribution-flow.jpg" alt="更改投資授權說明" className="w-full" />
+          <img src="./images/future-contribution-flow.jpg" alt="更改投資授權說明" className="w-full bg-white mix-blend-normal" />
         </div>
 
         <p className="text-[13px] text-[#666]">*為簡化說明，上述例子假設所有基金價格所指時間內保持不變。在實際情況下，若基金價格變動，現有強積金的投資組合結餘亦會隨之改變。</p>

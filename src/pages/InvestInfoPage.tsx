@@ -33,7 +33,7 @@ const InvestInfoPage = () => {
         </ul>
 
         <div>
-          <img src="./images/fund-transfer-flow.jpg" alt="基金轉換說明" className="w-full" />
+          <img src="./images/fund-transfer-flow.jpg" alt="基金轉換說明" className="w-full bg-white mix-blend-normal" />
         </div>
 
         <p className="text-[13px] text-[#666]">*為簡化說明，上述例子假設所有基金價格在作出基金轉換指示之前及之後均保持不變。在實際情況下，若基金價格在作出指示後有所變動，現有強積金的投資組合結餘亦會隨之改變。</p>
@@ -54,7 +54,7 @@ const InvestInfoPage = () => {
         </ul>
 
         <div>
-          <img src="./images/portfolio-rebalance-flow.jpg" alt="重組投資組合說明" className="w-full" />
+          <img src="./images/portfolio-rebalance-flow.jpg" alt="重組投資組合說明" className="w-full bg-white mix-blend-normal" />
         </div>
 
         <p className="text-[13px] text-[#666]">*為簡化說明，上述例子假設所有基金價格在作出指示之前及之後均保持不變。在實際情況下，若基金價格在作出指示後有所變動，現有強積金的投資組合結餘亦會隨之改變。</p>
