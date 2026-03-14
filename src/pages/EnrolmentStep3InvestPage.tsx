@@ -80,7 +80,7 @@ const EnrolmentStep3InvestPage = () => {
   const isNextEnabled = mandatoryTotal === 100 && voluntaryTotal === 100;
 
   const openFundLink = () => {
-    window.open('https://web.aia.com.hk/zh-hk/retirement/mpf/individual-member-fund-price', '_blank', 'noopener,noreferrer');
+    window.open('https://www.aia.com.hk/zh-hk/products/mpf/list', '_blank', 'noopener,noreferrer');
   };
 
   const openDisInfo = () => {
