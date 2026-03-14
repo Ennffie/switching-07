@@ -185,7 +185,7 @@ const EnrolmentStep3InvestPage = () => {
           <span className="text-[#1F1F1F]">總和：</span>
           <span className={`text-[20px] font-bold ${total === 100 ? 'text-[#E39118]' : 'text-[#D62828]'}`}>{total}%</span>
         </div>
-        <button className={`w-full h-[58px] rounded-full text-[19px] font-semibold mb-4 ${isNextEnabled ? 'bg-[#19345B] text-white' : 'bg-[#E6E3E3] text-[#B8B4B4]'}`}>下一步</button>
+        <button onClick={() => isNextEnabled && navigate('/enrolment-terms')} className={`w-full h-[58px] rounded-full text-[19px] font-semibold mb-4 ${isNextEnabled ? 'bg-[#19345B] text-white' : 'bg-[#E6E3E3] text-[#B8B4B4]'}`}>下一步</button>
         <div className="text-center text-[18px] text-[#9A9696]">新增指示</div>
       </div>
 
