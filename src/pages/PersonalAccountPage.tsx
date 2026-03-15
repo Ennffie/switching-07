@@ -228,9 +228,6 @@ const PersonalAccountPage = () => {
                   內的「直接促銷」部分，使用閣下的個人資料作直接促銷之用途。閣下在此作出之指示，將取代閣下先前可能已向積金易平台有限公司提供的任何有關選擇「直接促銷」的指示。
                 </div>
               </div>
-              <div>
-                <div className="text-[22px] text-[#111]">是</div>
-              </div>
             </div>
           )}
         </div>
