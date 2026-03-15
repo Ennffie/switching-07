@@ -53,7 +53,7 @@ const AccountManagementPage = () => {
                   <button
                     key={plan.no}
                     onClick={() => setSelectedPlan(plan.no)}
-                    className={`w-full text-left rounded-[18px] px-6 py-5 shadow-[0_6px_18px_rgba(0,0,0,0.10)] border ${selectedPlan === plan.no ? 'border-[#1E3557]' : 'border-white'} bg-white`}
+                    className={`w-full text-left rounded-[18px] px-6 py-5 border bg-white shadow-[0_10px_24px_rgba(0,0,0,0.14)] ${selectedPlan === plan.no ? 'border-[2px] border-[#E9A11A]' : 'border-white'}`}
                   >
                     <div className="text-[15px] text-[#8F8B8B] mb-2">{plan.holder}</div>
                     <div className="text-[18px] leading-[1.5] text-[#1F1F1F] font-medium">{plan.name}</div>
