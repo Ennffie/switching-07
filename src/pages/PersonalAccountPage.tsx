@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronDown, ChevronUp } from 'lucide-react';
 
 type Tab = 'overview' | 'details';
 
@@ -110,45 +110,51 @@ const PersonalAccountPage = () => {
       {activeTab === 'details' && (
         <div className="pb-32">
           <div className="px-5 pt-6 pb-4">
-            <div className="bg-[#FCF3E8] rounded-[18px] px-5 py-5 flex items-start justify-between gap-4">
-              <div>
-                <div className="text-[20px] font-semibold text-[#1F1F1F] mb-2">友邦強積金優選計劃</div>
-                <div className="text-[16px] text-[#6F6B6B]">帳戶號碼： 70741425</div>
-              </div>
-              <button className="text-[#1E3557] mt-1"><ExternalLink size={22} /></button>
-            </div>
+            <div className="text-[20px] font-bold text-[#1F1F1F] mb-2">友邦強積金優選計劃</div>
+            <div className="text-[16px] text-[#666666] leading-[1.5]">AIA MPF - Prime Value Choice</div>
           </div>
 
-          <div className="px-5 pb-6 space-y-8">
-            <div>
-              <div className="text-[18px] text-[#7A7777] mb-2">帳戶結餘（港幣）</div>
-              <div className="text-[22px] font-semibold text-[#111]">$ 128,396.91</div>
+          <div className="border-t border-b border-[#DADADA] py-4 px-5 flex items-center justify-between text-[#1F1F1F]">
+            <div className="flex items-center gap-3">
+              <span className="text-[#D08A17] text-[30px] leading-none">✓</span>
+              <span className="text-[18px] font-medium">個人詳細資料</span>
             </div>
-            <div>
-              <div className="text-[18px] text-[#7A7777] mb-2">帳戶生效日期（日／月／年）</div>
-              <div className="text-[22px] font-semibold text-[#111]">24/09/2011</div>
-            </div>
+            <span className="text-[22px]">⌃</span>
           </div>
 
-          <button onClick={() => setOpenContact(v => !v)} className="w-full px-5 py-5 flex items-center justify-between border-t border-b border-[#ECE7E1] text-left">
-            <div className="text-[18px] text-[#1F1F1F]">聯絡資料</div>
+          <div className="px-5 py-6 space-y-8 border-b border-[#ECE7E1]">
+            <div>
+              <div className="text-[18px] text-[#B0ACAC] mb-2">稱謂</div>
+              <div className="text-[22px] text-[#111]">先生</div>
+            </div>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-8">
+              <div><div className="text-[18px] text-[#B0ACAC] mb-2">姓氏（英文）</div><div className="text-[22px] text-[#111]">WONG</div></div>
+              <div><div className="text-[18px] text-[#B0ACAC] mb-2">名字（英文）</div><div className="text-[22px] text-[#111]">KA MING</div></div>
+              <div><div className="text-[18px] text-[#B0ACAC] mb-2">姓氏（中文）</div><div className="text-[22px] text-[#111]">黃</div></div>
+              <div><div className="text-[18px] text-[#B0ACAC] mb-2">名字（中文）</div><div className="text-[22px] text-[#111]">家明</div></div>
+            </div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">身份證明文件類別</div><div className="text-[22px] text-[#111]">Hong Kong身份證</div></div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">身份證明號碼</div><div className="text-[22px] text-[#111]">ZC705414(5)</div></div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">出生日期（日／月／年）</div><div className="text-[22px] text-[#111]">24/09/2011</div></div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">性別</div><div className="text-[22px] text-[#111]">男性</div></div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">出生地點</div><div className="text-[22px] text-[#111]">Hong Kong</div></div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">國籍</div><div className="text-[22px] text-[#111]">中國</div></div>
+            <div><div className="text-[18px] text-[#B0ACAC] mb-2">職位</div><div className="text-[22px] text-[#111]">行政和商業經理</div></div>
+          </div>
+
+          <button onClick={() => setOpenContact(v => !v)} className="w-full px-5 py-5 flex items-center justify-between border-b border-[#ECE7E1] text-left">
+            <div className="flex items-center gap-3"><span className="text-[#D08A17] text-[30px] leading-none">✓</span><div className="text-[18px] text-[#1F1F1F]">聯絡資料</div></div>
             {openContact ? <ChevronUp size={22} className="text-[#1F1F1F]" /> : <ChevronDown size={22} className="text-[#1F1F1F]" />}
           </button>
           {openContact && (
             <div className="px-5 py-6 space-y-8 border-b border-[#ECE7E1]">
-              <div>
-                <div className="text-[18px] text-[#B0ACAC] mb-2">電郵地址</div>
-                <div className="text-[22px] text-[#111]">enfieldlaw@yahoo.com.hk</div>
-              </div>
-              <div>
-                <div className="text-[18px] text-[#B0ACAC] mb-2">手機號碼</div>
-                <div className="text-[22px] text-[#111]">+852 98849795</div>
-              </div>
+              <div><div className="text-[18px] text-[#B0ACAC] mb-2">電郵地址</div><div className="text-[22px] text-[#111]">enfieldlaw@yahoo.com.hk</div></div>
+              <div><div className="text-[18px] text-[#B0ACAC] mb-2">手機號碼</div><div className="text-[22px] text-[#111]">+852 98849795</div></div>
             </div>
           )}
 
           <button onClick={() => setOpenAddress(v => !v)} className="w-full px-5 py-5 flex items-center justify-between border-b border-[#ECE7E1] text-left">
-            <div className="text-[18px] text-[#1F1F1F]">地址</div>
+            <div className="flex items-center gap-3"><span className="text-[#D08A17] text-[30px] leading-none">✓</span><div className="text-[18px] text-[#1F1F1F]">地址</div></div>
             {openAddress ? <ChevronUp size={22} className="text-[#1F1F1F]" /> : <ChevronDown size={22} className="text-[#1F1F1F]" />}
           </button>
           {openAddress && (
@@ -163,7 +169,6 @@ const PersonalAccountPage = () => {
                   <div><div className="text-[18px] text-[#B0ACAC] mb-2">大廈</div><div className="text-[22px] text-[#111]">HONG KONG</div></div>
                 </div>
               </div>
-
               <div>
                 <div className="text-[22px] font-semibold text-[#111] mb-6">住址</div>
                 <div className="space-y-6">
@@ -178,7 +183,7 @@ const PersonalAccountPage = () => {
           )}
 
           <button onClick={() => setOpenComm(v => !v)} className="w-full px-5 py-5 flex items-center justify-between border-b border-[#ECE7E1] text-left">
-            <div className="text-[18px] text-[#1F1F1F]">通訊方式</div>
+            <div className="flex items-center gap-3"><span className="text-[#D08A17] text-[30px] leading-none">✓</span><div className="text-[18px] text-[#1F1F1F]">通訊方式</div></div>
             {openComm ? <ChevronUp size={22} className="text-[#1F1F1F]" /> : <ChevronDown size={22} className="text-[#1F1F1F]" />}
           </button>
         </div>
