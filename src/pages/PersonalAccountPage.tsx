@@ -123,9 +123,7 @@ const PersonalAccountPage = () => {
                 { icon: './icons/shortcut-edit-user.jpg', label: '編輯快捷連結' },
               ].map((item) => (
                 <button key={item.label} className="flex flex-col items-center text-center">
-                  <div className="w-[68px] h-[68px] rounded-full bg-[#F6F7F8] flex items-center justify-center mb-3">
-                    <img src={item.icon} alt={item.label} className="w-[34px] h-[34px] object-contain" />
-                  </div>
+                  <img src={item.icon} alt={item.label} className="w-[68px] h-[68px] object-contain mb-3" />
                   <span className="text-[14px] leading-[1.45] text-[#1f1f1f] max-w-[92px]">{item.label}</span>
                 </button>
               ))}
@@ -242,9 +240,7 @@ const PersonalAccountPage = () => {
                 { icon: './icons/shortcut-edit-user.jpg', label: '編輯快捷連結' },
               ].map((item) => (
                 <button key={item.label} className="flex flex-col items-center text-center">
-                  <div className="w-[68px] h-[68px] rounded-full bg-[#F6F7F8] flex items-center justify-center mb-3">
-                    <img src={item.icon} alt={item.label} className="w-[34px] h-[34px] object-contain" />
-                  </div>
+                  <img src={item.icon} alt={item.label} className="w-[68px] h-[68px] object-contain mb-3" />
                   <span className="text-[14px] leading-[1.45] text-[#1f1f1f] max-w-[92px]">{item.label}</span>
                 </button>
               ))}
