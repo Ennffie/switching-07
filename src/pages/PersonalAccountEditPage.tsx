@@ -78,7 +78,7 @@ const PersonalAccountEditPage = () => {
         </div>
       </div>
 
-      <div className={showEmailVerify || showVerifyFailed ? 'pb-[360px]' : 'pb-12'}>
+      <div className={showEmailVerify || showVerifyFailed ? 'pb-[360px]' : 'pb-0'}>
         {sectionHeader('聯絡資料', openContact, () => setOpenContact(v => !v))}
         {openContact && (
           <div className="bg-[#FAF9F8] px-5 py-8 space-y-7 border-b border-[#ECE7E1]">
@@ -140,7 +140,7 @@ const PersonalAccountEditPage = () => {
 
         {sectionHeader('通訊方式', openComm, () => setOpenComm(v => !v))}
 
-        <div className="bg-[#FAF9F8] px-5 pt-8 pb-10 mt-4">
+        <div className="bg-[#FAF9F8] px-5 pt-10 pb-16 mt-10">
           <button onClick={() => navigate(-1)} className="w-full h-[58px] rounded-full bg-[#19345B] text-white text-[22px] font-semibold mb-4">儲存</button>
           <button onClick={() => navigate(-1)} className="w-full text-center text-[22px] text-[#1F1F1F]">取消</button>
         </div>
