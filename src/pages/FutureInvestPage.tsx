@@ -63,6 +63,7 @@ const FutureInvestPage = () => {
   const [showKeypad, setShowKeypad] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [sortField, setSortField] = useState<'name' | 'risk' | null>(null);
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [activeFundId, setActiveFundId] = useState<string | null>(null);
   const [keypadValue, setKeypadValue] = useState('');
 
@@ -73,9 +74,14 @@ const FutureInvestPage = () => {
     if (!sortField) return funds;
     const defaultFund = funds.find(f => f.name.includes('預設投資策略'));
     const others = funds.filter(f => !f.name.includes('預設投資策略'));
-    others.sort((a, b) => sortField === 'name' ? a.name.localeCompare(b.name, 'zh-HK') : a.riskLevel - b.riskLevel);
+    others.sort((a, b) => {
+      if (sortField === 'name') {
+        return sortDirection === 'asc' ? a.name.localeCompare(b.name, 'zh-HK') : b.name.localeCompare(a.name, 'zh-HK');
+      }
+      return sortDirection === 'asc' ? a.riskLevel - b.riskLevel : b.riskLevel - a.riskLevel;
+    });
     return defaultFund ? [defaultFund, ...others] : others;
-  }, [contributionType, employerMandatoryFunds, employeeMandatoryFunds, sortField]);
+  }, [contributionType, employerMandatoryFunds, employeeMandatoryFunds, sortField, sortDirection]);
   const employerTotal = useMemo(() => employerMandatoryFunds.reduce((sum, f) => sum + f.allocation, 0), [employerMandatoryFunds]);
   const employeeTotal = useMemo(() => employeeMandatoryFunds.reduce((sum, f) => sum + f.allocation, 0), [employeeMandatoryFunds]);
   const total = contributionType === 'employer-mandatory' ? employerTotal : employeeTotal;
@@ -116,6 +122,7 @@ const FutureInvestPage = () => {
     setActiveFundId(null);
     setShowKeypad(false);
     setSortField(null);
+    setSortDirection('asc');
   };
 
   return (
@@ -209,16 +216,81 @@ const FutureInvestPage = () => {
 
 
       {showSortModal && (
-        <div className="fixed inset-0 z-30 flex items-end">
-          <div className="absolute inset-0 bg-black/35" onClick={() => setShowSortModal(false)} />
-          <div className="relative w-full bg-white rounded-t-[24px] overflow-hidden">
-            <div className="flex items-center justify-between px-5 py-4 border-b border-[#E8E5E5]">
-              <button onClick={() => setSortField(null)} className="text-[16px] text-[#1F1F1F]">重設</button>
-              <div className="text-[18px] font-semibold text-[#1F1F1F]">排序</div>
-              <button onClick={() => setShowSortModal(false)} className="text-[#1F1F1F]"><X size={22} /></button>
+        <div className="fixed inset-0 z-40 flex items-end">
+          <div className="absolute inset-0 bg-black/30" onClick={() => setShowSortModal(false)} />
+          <div className="relative w-full bg-white rounded-t-2xl">
+            <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+              <button 
+                className="text-base text-gray-600"
+                onClick={() => {
+                  setSortField(null);
+                  setSortDirection('asc');
+                }}
+              >
+                重設
+              </button>
+              <span className="text-lg font-medium text-gray-900">排序</span>
+              <button 
+                className="text-gray-600"
+                onClick={() => setShowSortModal(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
             </div>
-            <button onClick={() => { setSortField('name'); setShowSortModal(false); }} className="w-full text-left px-5 py-5 text-[18px] text-[#1F1F1F] border-b border-[#F0EDED]">基金名稱</button>
-            <button onClick={() => { setSortField('risk'); setShowSortModal(false); }} className="w-full text-left px-5 py-5 text-[18px] text-[#1F1F1F]">風險級別</button>
+            
+            <div className="px-4">
+              <button
+                className="w-full flex items-center justify-between py-4 border-b border-gray-200"
+                onClick={() => {
+                  if (sortField === 'name') {
+                    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+                  } else {
+                    setSortField('name');
+                    setSortDirection('asc');
+                  }
+                }}
+              >
+                <span className={`text-base ${sortField === 'name' ? 'text-[#E67E22]' : 'text-gray-900'}`}>
+                  基金名稱
+                </span>
+                {sortField === 'name' && (
+                  <svg 
+                    className={`w-5 h-5 text-[#E67E22] transition-transform ${sortDirection === 'desc' ? 'rotate-180' : ''}`} 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                )}
+              </button>
+              
+              <button
+                className="w-full flex items-center justify-between py-4"
+                onClick={() => {
+                  if (sortField === 'risk') {
+                    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+                  } else {
+                    setSortField('risk');
+                    setSortDirection('asc');
+                  }
+                }}
+              >
+                <span className={`text-base ${sortField === 'risk' ? 'text-[#E67E22]' : 'text-gray-900'}`}>
+                  風險級別
+                </span>
+                {sortField === 'risk' && (
+                  <svg 
+                    className={`w-5 h-5 text-[#E67E22] transition-transform ${sortDirection === 'desc' ? 'rotate-180' : ''}`} 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}
