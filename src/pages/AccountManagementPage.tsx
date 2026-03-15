@@ -6,7 +6,7 @@ const AccountManagementPage = () => {
   const navigate = useNavigate();
   const [openMPF, setOpenMPF] = useState(false);
   const [showPlanModal, setShowPlanModal] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('GS29819644');
+  const [selectedPlan, setSelectedPlan] = useState('VC70741425');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,10 +46,9 @@ const AccountManagementPage = () => {
               <div className="text-center text-[24px] font-bold text-[#E2A12A] mb-7">選擇計劃</div>
               <div className="space-y-5 max-h-[430px] overflow-y-auto pb-2">
                 {[
-                  { holder: '個人賬戶持有人', name: '宏利環球精選（強積金）計劃', no: 'GS29819644' },
-                  { holder: '個人賬戶持有人', name: '滙豐強積金智選計劃', no: 'HB42042000' },
-                  { holder: '個人賬戶持有人', name: '恒生強積金智選計劃', no: 'HS50618628' },
                   { holder: '個人賬戶持有人', name: '友邦強積金優選計劃', no: 'VC70741425' },
+                  { holder: '個人賬戶持有人', name: '宏利環球精選（強積金）計劃', no: 'GS29819644' },
+                  { holder: '個人賬戶持有人', name: '豐匯退休計劃', no: 'FW42042000' },
                 ].map((plan) => (
                   <button
                     key={plan.no}
