@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 const FutureSuccessPage = () => {
   const navigate = useNavigate();
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -16,7 +19,7 @@ const FutureSuccessPage = () => {
 
         <div className="text-center text-gray-700 text-[15px] mb-14 space-y-2">
           <p>參考編號：IMD2009217000223595</p>
-          <p>提交日期及時間：25/02/2026, 12:36</p>
+          <p>提交日期及時間：{dateStr}, {timeStr}</p>
         </div>
 
         <div className="w-full max-w-sm space-y-4">
