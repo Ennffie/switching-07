@@ -5,6 +5,7 @@ import { TransferProvider } from './context/TransferContext';
 import { EnrolmentProvider } from './context/EnrolmentContext';
 import { FutureInvestProvider } from './context/FutureInvestContext';
 import { FutureSubmissionProvider } from './context/FutureSubmissionContext';
+import { PersonalAccountProvider } from './context/PersonalAccountContext';
 import MyMPFPage from './pages/MyMPFPage';
 import OverviewPage from './pages/OverviewPage';
 import InvestPage from './pages/InvestPage';
@@ -49,6 +50,7 @@ function App() {
       <EnrolmentProvider>
         <FutureInvestProvider>
           <FutureSubmissionProvider>
+            <PersonalAccountProvider>
       <Router>
           <ScrollToTop />
         <Routes>
@@ -91,6 +93,7 @@ function App() {
           <Route path="/quiz/room-cleanliness" element={<RoomCleanlinessQuizPage />} />
         </Routes>
       </Router>
+            </PersonalAccountProvider>
           </FutureSubmissionProvider>
         </FutureInvestProvider>
       </EnrolmentProvider>
