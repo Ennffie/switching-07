@@ -31,6 +31,7 @@ import TodoPage from './pages/TodoPage';
 import ProfilePage from './pages/ProfilePage';
 import AccountManagementPage from './pages/AccountManagementPage';
 import PersonalAccountPage from './pages/PersonalAccountPage';
+import MyAccountPage from './pages/MyAccountPage';
 import PersonalAccountEditPage from './pages/PersonalAccountEditPage';
 import EnrolmentInstructionPage from './pages/EnrolmentInstructionPage';
 import EnrolmentStep1Page from './pages/EnrolmentStep1Page';
@@ -76,6 +77,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/account-management" element={<AccountManagementPage />} />
           <Route path="/personal-account" element={<PersonalAccountPage />} />
+          <Route path="/my-account" element={<MyAccountPage />} />
           <Route path="/personal-account-edit" element={<PersonalAccountEditPage />} />
           <Route path="/enrolment-instruction" element={<EnrolmentInstructionPage />} />
           <Route path="/enrolment-step-1" element={<EnrolmentStep1Page />} />
