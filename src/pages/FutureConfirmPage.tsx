@@ -110,7 +110,7 @@ const FutureConfirmPage = () => {
               </div>
 
               <div className="mb-5">
-                <h5 className="text-base font-medium text-gray-900 mb-3">僱員強制性供款</h5>
+                <h5 className="text-base font-medium text-gray-900 mb-3">僱員強制性供款（港幣）</h5>
                 {employeeFundsToShow.filter(f => f.allocation > 0).map((fund, idx) => (
                   <div key={idx} className="flex justify-between py-1.5">
                     <span className="text-base text-gray-900">{fund.name}</span>
