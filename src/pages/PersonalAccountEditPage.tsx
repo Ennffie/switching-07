@@ -218,7 +218,7 @@ const PersonalAccountEditPage = () => {
           </div>
           <div className="fixed left-0 right-0 bottom-0 z-50 bg-[#D1D5DB] border-t border-[#BFC5CD] px-[6px] pt-[6px] pb-[14px]">
             <div className="text-center text-[15px] text-[#111] py-1.5">{keyboardSource}</div>
-            <div className="text-center text-[20px] font-medium text-[#111] pb-2">{latestOtp}</div>
+            <button onClick={() => setVerifyCode(latestOtp)} className="w-full text-center text-[20px] font-medium text-[#111] pb-2">{latestOtp}</button>
             <div className="grid grid-cols-3 gap-[5px]">
               {[['1', ''], ['2', 'ABC'], ['3', 'DEF'], ['4', 'GHI'], ['5', 'JKL'], ['6', 'MNO'], ['7', 'PQRS'], ['8', 'TUV'], ['9', 'WXYZ']].map(([n, sub]) => <button key={n} onClick={() => pressCode(n)} className="h-[58px] rounded-[6px] bg-white flex flex-col items-center justify-center shadow-[0_1px_0_rgba(0,0,0,0.16)]"><span className="text-[18px] leading-none text-black">{n}</span>{sub ? <span className="text-[9px] leading-none mt-1 tracking-[0.12em] text-black font-semibold">{sub}</span> : <span className="h-[9px] mt-1" />}</button>)}
               <div className="h-[58px]" />
