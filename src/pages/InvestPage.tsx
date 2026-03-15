@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Info } from 'lucide-react';
+import { useFutureInvest } from '../context/FutureInvestContext';
+import { useFutureSubmission } from '../context/FutureSubmissionContext';
 
 const InvestPage = () => {
   const navigate = useNavigate();
+  const { resetFutureInvest } = useFutureInvest();
+  const { resetFutureSubmission } = useFutureSubmission();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,6 +18,8 @@ const InvestPage = () => {
       navigate('/invest/select-plan');
     }
     if (type === 'future') {
+      resetFutureInvest();
+      resetFutureSubmission();
       navigate('/invest/future-select-plan');
     }
   };

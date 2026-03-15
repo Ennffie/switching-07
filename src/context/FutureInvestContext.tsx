@@ -8,6 +8,7 @@ interface FutureInvestContextType {
   employeeMandatoryFunds: FundAllocation[];
   setEmployerMandatoryFunds: React.Dispatch<React.SetStateAction<FundAllocation[]>>;
   setEmployeeMandatoryFunds: React.Dispatch<React.SetStateAction<FundAllocation[]>>;
+  resetFutureInvest: () => void;
 }
 
 const FutureInvestContext = createContext<FutureInvestContextType | undefined>(undefined);
@@ -16,8 +17,13 @@ export const FutureInvestProvider = ({ children }: { children: ReactNode }) => {
   const [employerMandatoryFunds, setEmployerMandatoryFunds] = useState<FundAllocation[]>([]);
   const [employeeMandatoryFunds, setEmployeeMandatoryFunds] = useState<FundAllocation[]>([]);
 
+  const resetFutureInvest = () => {
+    setEmployerMandatoryFunds([]);
+    setEmployeeMandatoryFunds([]);
+  };
+
   return (
-    <FutureInvestContext.Provider value={{ employerMandatoryFunds, employeeMandatoryFunds, setEmployerMandatoryFunds, setEmployeeMandatoryFunds }}>
+    <FutureInvestContext.Provider value={{ employerMandatoryFunds, employeeMandatoryFunds, setEmployerMandatoryFunds, setEmployeeMandatoryFunds, resetFutureInvest }}>
       {children}
     </FutureInvestContext.Provider>
   );
