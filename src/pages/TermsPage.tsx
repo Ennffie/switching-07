@@ -6,7 +6,6 @@ const TermsPage = () => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [canAccept, setCanAccept] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -220,7 +219,7 @@ const TermsPage = () => {
       {/* Bottom Buttons */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-4 z-40">
         <button 
-          onClick={() => setShowModal(true)}
+          onClick={() => navigate('/invest/future-success')}
           disabled={!canAccept}
           className={`w-full py-4 rounded-full text-lg font-medium mb-3 transition-all ${
             canAccept 
@@ -238,50 +237,6 @@ const TermsPage = () => {
         </button>
       </div>
 
-      {/* Modal - 下一個工作日處理 */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setShowModal(false)} />
-          <div className="relative bg-white w-full max-w-sm rounded-2xl p-6 text-center">
-            {/* Close button */}
-            <button 
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-400"
-            >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            {/* Icon */}
-            <div className="mb-4">
-              <img 
-                src="./images/icon-next-day.jpg" 
-                alt="下一個工作日處理"
-                className="w-24 h-24 mx-auto object-contain"
-              />
-            </div>
-
-            {/* Title */}
-            <h3 className="text-xl font-bold text-[#E67E22] mb-3">
-              你的指示將於下一個工作日處理
-            </h3>
-
-            {/* Description */}
-            <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-              你的投資指示於截止時間後提交，因此有關指示將會在下一個交易日處理。（提交投資指示的截止時間為每個工作天的下午四時正）
-            </p>
-
-            {/* Next Step Button */}
-            <button 
-              onClick={() => navigate('/invest/future-success')}
-              className="w-full py-4 bg-[#1e3a5f] text-white rounded-full text-lg font-medium active:scale-[0.98] transition-transform"
-            >
-              下一步
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
