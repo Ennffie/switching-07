@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useFutureSubmission } from '../context/FutureSubmissionContext';
 
 const FutureSuccessPage = () => {
   const navigate = useNavigate();
+  const { referenceNumber } = useFutureSubmission();
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
   const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
@@ -18,13 +20,13 @@ const FutureSuccessPage = () => {
         </h1>
 
         <div className="text-center text-gray-700 text-[15px] mb-14 space-y-2">
-          <p>參考編號：IMD2009217000223595</p>
+          <p>參考編號：{referenceNumber}</p>
           <p>提交日期及時間：{dateStr}, {timeStr}</p>
         </div>
 
         <div className="w-full max-w-sm space-y-4">
           <button
-            onClick={() => navigate('/invest/records')}
+            onClick={() => navigate('/invest/future-records')}
             className="w-full py-4 bg-[#1e3a5f] text-white rounded-full text-lg font-medium active:scale-[0.98] transition-transform"
           >
             查閱提交狀態

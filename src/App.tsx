@@ -4,6 +4,7 @@ import ScrollToTop from './components/ScrollToTop';
 import { TransferProvider } from './context/TransferContext';
 import { EnrolmentProvider } from './context/EnrolmentContext';
 import { FutureInvestProvider } from './context/FutureInvestContext';
+import { FutureSubmissionProvider } from './context/FutureSubmissionContext';
 import MyMPFPage from './pages/MyMPFPage';
 import OverviewPage from './pages/OverviewPage';
 import InvestPage from './pages/InvestPage';
@@ -14,6 +15,7 @@ import FutureSelectPlanPage from './pages/FutureSelectPlanPage';
 import FutureInvestPage from './pages/FutureInvestPage';
 import FutureConfirmPage from './pages/FutureConfirmPage';
 import FutureSuccessPage from './pages/FutureSuccessPage';
+import FutureRecordsPage from './pages/FutureRecordsPage';
 import FundTransferPage from './pages/FundTransferPage';
 import ConfirmPage from './pages/ConfirmPage';
 import TermsPage from './pages/TermsPage';
@@ -42,6 +44,7 @@ function App() {
     <TransferProvider>
       <EnrolmentProvider>
         <FutureInvestProvider>
+          <FutureSubmissionProvider>
       <Router>
           <ScrollToTop />
         <Routes>
@@ -55,6 +58,7 @@ function App() {
           <Route path="/invest/future-step-2" element={<FutureInvestPage />} />
           <Route path="/invest/future-confirm" element={<FutureConfirmPage />} />
           <Route path="/invest/future-success" element={<FutureSuccessPage />} />
+          <Route path="/invest/future-records" element={<FutureRecordsPage />} />
           <Route path="/invest/fund-transfer" element={<FundTransferPage />} />
           <Route path="/invest/confirm" element={<ConfirmPage />} />
           <Route path="/invest/terms" element={<TermsPage />} />
@@ -79,6 +83,7 @@ function App() {
           <Route path="/quiz/room-cleanliness" element={<RoomCleanlinessQuizPage />} />
         </Routes>
       </Router>
+          </FutureSubmissionProvider>
         </FutureInvestProvider>
       </EnrolmentProvider>
     </TransferProvider>
