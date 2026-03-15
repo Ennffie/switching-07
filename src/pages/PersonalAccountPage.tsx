@@ -4,8 +4,8 @@ import { ChevronLeft, ChevronDown, ChevronUp } from 'lucide-react';
 import { usePersonalAccount } from '../context/PersonalAccountContext';
 
 const funds = [
-  { name: '友邦強積金優選計劃 - 大中華股票基金', balance: 30426.94, color: '#F2A100' },
-  { name: '友邦強積金優選計劃 - 亞洲股票基金', balance: 246.84, color: '#19A7A4' },
+  { name: '友邦強積金優選計劃 - 大中華股票基金', balance: 30426.94, color: '#F6A800' },
+  { name: '友邦強積金優選計劃 - 亞洲股票基金', balance: 246.84, color: '#18B7B5' },
 ];
 
 const PersonalAccountPage = () => {
@@ -59,17 +59,17 @@ const PersonalAccountPage = () => {
         <div className="flex border-b border-[#E5E1DD]">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`relative flex-1 pb-4 pt-3 text-[17px] font-semibold ${activeTab === 'overview' ? 'text-[#E4A11B]' : 'text-[#B8B2AE]'}`}
+            className={`relative flex-1 pb-4 pt-3 text-[17px] font-semibold ${activeTab === 'overview' ? 'text-[#E5A323]' : 'text-[#B8B2AE]'}`}
           >
             帳戶概覽
-            {activeTab === 'overview' && <span className="absolute left-0 right-0 -bottom-[1px] h-[4px] rounded-full bg-[#F2A100]" />}
+            {activeTab === 'overview' && <span className="absolute left-0 right-0 -bottom-[1px] h-[4px] rounded-full bg-[#F6A800]" />}
           </button>
           <button
             onClick={() => setActiveTab('details')}
-            className={`relative flex-1 pb-4 pt-3 text-[17px] font-semibold ${activeTab === 'details' ? 'text-[#E4A11B]' : 'text-[#B8B2AE]'}`}
+            className={`relative flex-1 pb-4 pt-3 text-[17px] font-semibold ${activeTab === 'details' ? 'text-[#E5A323]' : 'text-[#B8B2AE]'}`}
           >
             帳戶資料
-            {activeTab === 'details' && <span className="absolute left-0 right-0 -bottom-[1px] h-[4px] rounded-full bg-[#F2A100]" />}
+            {activeTab === 'details' && <span className="absolute left-0 right-0 -bottom-[1px] h-[4px] rounded-full bg-[#F6A800]" />}
           </button>
         </div>
       </div>
@@ -98,7 +98,7 @@ const PersonalAccountPage = () => {
                 <div className="text-center py-4 text-[18px] font-semibold text-[#1F1F1F] border-r border-[#E7E0D6]">市場價值</div>
                 <div className="text-center py-4 text-[18px] font-semibold text-[#CFC8C1]">強制性供款</div>
               </div>
-              <div className="bg-[#F2A100] text-white grid grid-cols-[1fr_140px] px-4 py-2 text-[16px] font-semibold">
+              <div className="bg-[#F6A800] text-white grid grid-cols-[1fr_140px] px-4 py-2 text-[16px] font-semibold">
                 <div>基金名稱</div>
                 <div className="text-right">市場價值（港幣）</div>
               </div>
