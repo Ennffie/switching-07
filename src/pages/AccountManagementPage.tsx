@@ -42,9 +42,9 @@ const AccountManagementPage = () => {
             <button onClick={() => setShowPlanModal(false)} className="absolute top-5 right-5 text-[#22395B] z-10">
               <span className="text-[38px] leading-none">×</span>
             </button>
-            <div className="px-6 pt-16 pb-6">
+            <div className="px-8 pt-16 pb-8">
               <div className="text-center text-[24px] font-bold text-[#E2A12A] mb-7">選擇計劃</div>
-              <div className="space-y-5 max-h-[430px] overflow-y-auto pb-2">
+              <div className="space-y-8 max-h-[460px] overflow-y-auto px-1 py-2">
                 {[
                   { holder: '個人賬戶持有人', name: '友邦強積金優選計劃', no: 'VC56442131' },
                   { holder: '個人賬戶持有人', name: '宏利環球精選（強積金）計劃', no: 'GS29819644' },
@@ -53,7 +53,7 @@ const AccountManagementPage = () => {
                   <button
                     key={plan.no}
                     onClick={() => setSelectedPlan(plan.no)}
-                    className={`w-full text-left rounded-[18px] px-6 py-5 border bg-white shadow-[0_0_22px_rgba(0,0,0,0.14)] ${selectedPlan === plan.no ? 'border-[2px] border-[#E9A11A]' : 'border-white'}`}
+                    className={`w-full text-left rounded-[18px] px-6 py-5 border bg-white shadow-[0_0_22px_rgba(0,0,0,0.14)] ${selectedPlan === plan.no ? 'border-[2px] border-[#E9A11A]' : 'border-transparent'}`}
                   >
                     <div className="text-[15px] text-[#8F8B8B] mb-2">{plan.holder}</div>
                     <div className="text-[18px] leading-[1.5] text-[#1F1F1F] font-medium">{plan.name}</div>
