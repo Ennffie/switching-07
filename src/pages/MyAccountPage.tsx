@@ -37,9 +37,20 @@ const MyAccountPage = () => {
 
       {/* Account Card */}
       <div className="bg-white mx-4 mt-4 rounded-[12px] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden">
-        <div className="px-5 py-5 border-b border-[#ECE7E1]">
-          <div className="text-[18px] font-semibold text-[#1F1F1F] mb-2">個人帳戶持有人賬戶</div>
+        {/* Card Header with Edit Icon */}
+        <div className="px-5 py-5 border-b border-[#ECE7E1] relative">
+          <div className="text-[18px] font-semibold text-[#1F1F1F] mb-2">友邦強積金優選計劃</div>
           <div className="text-[14px] text-[#7C7878]">帳戶號碼：70741425</div>
+          {/* Edit Icon - Right Corner */}
+          <button 
+            onClick={() => navigate('/personal-account-edit')} 
+            className="absolute right-5 top-1/2 -translate-y-1/2 w-[40px] h-[40px] rounded-[8px] bg-[#F6E6AA] flex items-center justify-center"
+          >
+            <svg className="w-[22px] h-[22px] text-[#1F1F1F]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M12 8v8M8 12h8" />
+            </svg>
+          </button>
         </div>
 
         {/* Tabs */}
@@ -115,14 +126,6 @@ const MyAccountPage = () => {
                 </div>
               </div>
             )}
-
-            {/* Update Button */}
-            <div className="px-5 pt-8 pb-10">
-              <button onClick={() => navigate('/personal-account-edit')} className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center gap-3">
-                <span className="text-[28px] leading-none">✎</span>
-                <span>更新</span>
-              </button>
-            </div>
           </div>
         )}
 
