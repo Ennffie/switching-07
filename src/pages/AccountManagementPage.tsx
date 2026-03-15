@@ -44,7 +44,7 @@ const AccountManagementPage = () => {
             </button>
             <div className="px-8 pt-16 pb-8">
               <div className="text-center text-[24px] font-bold text-[#E2A12A] mb-7">選擇計劃</div>
-              <div className="space-y-8 max-h-[460px] overflow-y-auto px-1 py-2">
+              <div className="space-y-5 max-h-[460px] overflow-y-auto px-1 py-2">
                 {[
                   { holder: '個人賬戶持有人', name: '友邦強積金優選計劃', no: 'VC56442131' },
                   { holder: '個人賬戶持有人', name: '宏利環球精選（強積金）計劃', no: 'GS29819644' },
