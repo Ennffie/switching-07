@@ -28,9 +28,7 @@ type VerifyTarget = 'email' | 'mobile' | null;
 const PersonalAccountEditPage = () => {
   const navigate = useNavigate();
   const { data, setData } = usePersonalAccount();
-  const [openContact, setOpenContact] = useState(true);
-  const [openAddress, setOpenAddress] = useState(true);
-  const [openComm, setOpenComm] = useState(false);
+  const [activeSection, setActiveSection] = useState<'contact' | 'address' | 'comm'>('contact');
   const [showSecondPhoneCodes, setShowSecondPhoneCodes] = useState(false);
   const [showVerifyPopup, setShowVerifyPopup] = useState(false);
   const [showVerifyFailed, setShowVerifyFailed] = useState(false);
@@ -159,8 +157,8 @@ const PersonalAccountEditPage = () => {
       </div>
 
       <div className={showVerifyPopup || showVerifyFailed ? 'pb-[360px]' : 'pb-12'}>
-        {sectionHeader('聯絡資料', openContact, () => setOpenContact(v => !v))}
-        {openContact && (
+        {sectionHeader('聯絡資料', activeSection === 'contact', () => setActiveSection(activeSection === 'contact' ? 'contact' : 'contact'))}
+        {activeSection === 'contact' && (
           <div className="bg-[#FAF9F8] px-5 py-8 space-y-7 border-b border-[#ECE7E1]">
             <div>
               <div className={labelCls}>電郵</div>
@@ -188,8 +186,8 @@ const PersonalAccountEditPage = () => {
           </div>
         )}
 
-        {sectionHeader('地址', openAddress, () => setOpenAddress(v => !v))}
-        {openAddress && (
+        {sectionHeader('地址', activeSection === 'address', () => setActiveSection('address'))}
+        {activeSection === 'address' && (
           <div className="bg-[#FAF9F8] px-5 py-8 border-b border-[#ECE7E1]">
             <div className="rounded-[12px] bg-[#FFF4E8] px-4 py-4 flex items-start gap-3 mb-8"><Lightbulb size={22} className="text-[#1F1F1F] mt-0.5 flex-shrink-0" /><div className="text-[16px] text-[#1F1F1F]">不接納郵政信箱。</div></div>
             <div className="text-[22px] font-semibold text-[#111] mb-6">住址</div>
@@ -259,7 +257,16 @@ const PersonalAccountEditPage = () => {
           </div>
         )}
 
-        {sectionHeader('通訊方式', openComm, () => setOpenComm(v => !v))}
+        {sectionHeader('通訊方式', activeSection === 'comm', () => setActiveSection('comm'))}
+        {activeSection === 'comm' && (
+          <div className="bg-[#FAF9F8] px-5 py-8 border-b border-[#ECE7E1] space-y-6">
+            <div className="text-[20px] leading-[1.7] text-[#111]">積金易平台有限公司直接促銷同意書：閣下同意積金易平台有限公司根據其收集個人資料聲明（eMPF.org.hk/pics）內的「直接促銷」部分，使用閣下的個人資料作直接促銷之用途。</div>
+            <div className="flex gap-6 text-[20px]">
+              <label className="flex items-center gap-3"><input type="radio" checked={data.directMarketingConsent === '是'} onChange={() => update('directMarketingConsent', '是')} />是</label>
+              <label className="flex items-center gap-3"><input type="radio" checked={data.directMarketingConsent === '否'} onChange={() => update('directMarketingConsent', '否')} />否</label>
+            </div>
+          </div>
+        )}
 
         <div className="bg-[#FAF9F8] px-5 pt-10 pb-16 mt-10">
           <button onClick={() => navigate(-1)} className="w-full h-[58px] rounded-full bg-[#19345B] text-white text-[22px] font-semibold mb-4">儲存</button>
