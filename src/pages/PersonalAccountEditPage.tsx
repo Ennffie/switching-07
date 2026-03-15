@@ -47,6 +47,13 @@ const PersonalAccountEditPage = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   useEffect(() => {
+    if (!showCountryDropdown) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = original; };
+  }, [showCountryDropdown]);
+
+  useEffect(() => {
     if (!showVerifyPopup) {
       setShowOtpNotice(false);
       return;
@@ -192,30 +199,39 @@ const PersonalAccountEditPage = () => {
                   <span>{data.residentialCountry}</span><ChevronDown size={20} className="text-[#1F1F1F]" />
                 </button>
                 {showCountryDropdown && (
-                  <div className="absolute left-0 right-0 top-[96px] z-30 rounded-[4px] bg-white border border-[#D9D9D9] shadow-[0_8px_20px_rgba(0,0,0,0.08)] overflow-hidden">
-                    <div className="h-[56px] border-b border-[#E7E7E7] px-5 flex items-center gap-3">
-                      <Search size={24} className="text-[#666]" />
-                      <input value={countrySearch} onChange={e => { setCountrySearch(e.target.value); setRegionMode(false); }} className="flex-1 text-[18px] text-[#111] outline-none" />
-                    </div>
-                    <div className="max-h-[330px] overflow-y-auto">
-                      {regionMode ? (
-                        <>
-                          <div className="px-6 pt-5 pb-2 text-[18px] text-[#5C5C5C]">中國</div>
-                          {regionChoices.map(item => (
-                            <button key={item} onClick={() => pickRegion(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
+                  <>
+                    <button onClick={() => setShowCountryDropdown(false)} className="fixed inset-0 z-20 bg-transparent cursor-default" aria-label="關閉國家選單" />
+                    <div className="absolute left-0 right-0 top-[96px] z-30 rounded-[4px] bg-white border border-[#D9D9D9] shadow-[0_8px_20px_rgba(0,0,0,0.08)] overflow-hidden">
+                      <div className="h-[56px] border-b border-[#E7E7E7] px-5 flex items-center gap-3">
+                        <Search size={24} className="text-[#666]" />
+                        <input value={countrySearch} onChange={e => { setCountrySearch(e.target.value); setRegionMode(false); }} className="flex-1 text-[18px] text-[#111] outline-none" />
+                      </div>
+                      <div className="max-h-[330px] overflow-y-auto overscroll-contain">
+                        {regionMode ? (
+                          <>
+                            <div className="px-6 pt-5 pb-2 text-[18px] text-[#5C5C5C]">中國</div>
+                            {regionChoices.map(item => (
+                              <button key={item} onClick={() => pickRegion(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
+                                {item}
+                              </button>
+                            ))}
+                            <div className="border-t border-[#ECECEC]" />
+                            {countryList.filter(item => item !== '中國' && !regionChoices.includes(item)).map(item => (
+                              <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
+                                {item}
+                              </button>
+                            ))}
+                          </>
+                        ) : (
+                          filteredCountries.filter(item => item !== '中國').map(item => (
+                            <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
                               {item}
                             </button>
-                          ))}
-                        </>
-                      ) : (
-                        filteredCountries.map(item => (
-                          <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
-                            {item}
-                          </button>
-                        ))
-                      )}
+                          ))
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
               </div>
 
