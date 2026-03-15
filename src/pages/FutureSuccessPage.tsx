@@ -30,7 +30,7 @@ const FutureSuccessPage = () => {
           </button>
 
           <button
-            onClick={() => navigate('/invest/future-info')}
+            onClick={() => navigate('/invest')}
             className="w-full py-4 bg-transparent text-gray-700 border border-gray-400 rounded-full text-lg font-medium"
           >
             設定基金轉換／重組投資組合指示
