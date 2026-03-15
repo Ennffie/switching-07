@@ -218,6 +218,21 @@ const PersonalAccountPage = () => {
             <div className="flex items-center gap-3"><span className="text-[#D08A17] text-[30px] leading-none">✓</span><div className="text-[18px] text-[#1F1F1F]">通訊方式</div></div>
             {openComm ? <ChevronUp size={22} className="text-[#1F1F1F]" /> : <ChevronDown size={22} className="text-[#1F1F1F]" />}
           </button>
+          {openComm && (
+            <div className="px-5 py-6 space-y-8 border-b border-[#ECE7E1]">
+              <div>
+                <div className="text-[18px] text-[#B0ACAC] mb-3">直接促銷同意書：</div>
+                <div className="text-[21px] leading-[1.7] text-[#111]">
+                  閣下同意積金易平台有限公司根據其
+                  <a href="https://eMPF.org.hk/pics" target="_blank" rel="noopener noreferrer" className="underline text-[#1E3557]">收集個人資料聲明（eMPF.org.hk/pics）</a>
+                  內的「直接促銷」部分，使用閣下的個人資料作直接促銷之用途。閣下在此作出之指示，將取代閣下先前可能已向積金易平台有限公司提供的任何有關選擇「直接促銷」的指示。
+                </div>
+              </div>
+              <div>
+                <div className="text-[22px] text-[#111]">是</div>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -255,7 +270,7 @@ const PersonalAccountPage = () => {
       {activeTab === 'details' && (
         <div className="fixed left-0 right-0 bottom-0 bg-white px-5 pt-3 pb-6 border-t border-[#ECE7E1] z-[5]">
           <button className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center gap-3">
-            <span className="text-[22px]">✎</span>
+            <span className="text-[28px] leading-none">✎</span>
             <span>更新</span>
           </button>
         </div>
