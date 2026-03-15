@@ -6,7 +6,7 @@ const AccountManagementPage = () => {
   const navigate = useNavigate();
   const [openMPF, setOpenMPF] = useState(false);
   const [showPlanModal, setShowPlanModal] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('VC56442131');
+  const [selectedPlan, setSelectedPlan] = useState('');
 
   useEffect(() => {
     window.scrollTo(0, 0);
