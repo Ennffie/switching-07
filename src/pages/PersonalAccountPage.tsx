@@ -4,8 +4,8 @@ import { ChevronLeft, ChevronDown, ChevronUp } from 'lucide-react';
 import { usePersonalAccount } from '../context/PersonalAccountContext';
 
 const funds = [
-  { name: '友邦強積金優選計劃 - 大中華股票基金', balance: 30426.94, color: '#F6A800' },
-  { name: '友邦強積金優選計劃 - 亞洲股票基金', balance: 246.84, color: '#18B7B5' },
+  { name: '友邦強積金優選計劃 - 大中華股票基金', balance: 30426.94, color: '#7FA3BE' },
+  { name: '友邦強積金優選計劃 - 亞洲股票基金', balance: 246.84, color: '#22C95E' },
 ];
 
 const Field = ({ label, value }: { label: string; value: string }) => (
