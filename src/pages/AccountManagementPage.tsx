@@ -71,12 +71,10 @@ const AccountManagementPage = () => {
                 }
                 if (selectedPlan === 'GS29819644') {
                   setShowPlanModal(false);
-                  navigate('/personal-account');
                   return;
                 }
                 if (selectedPlan === 'FW88273645') {
                   setShowPlanModal(false);
-                  navigate('/personal-account');
                   return;
                 }
                 setShowPlanModal(false);
