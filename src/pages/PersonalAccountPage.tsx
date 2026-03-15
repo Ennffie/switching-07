@@ -269,7 +269,7 @@ const PersonalAccountPage = () => {
 
       {activeTab === 'details' && (
         <div className="fixed left-0 right-0 bottom-0 bg-white px-5 pt-3 pb-6 border-t border-[#ECE7E1] z-[5]">
-          <button className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center gap-3">
+          <button onClick={() => navigate('/personal-account-edit')} className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center gap-3">
             <span className="text-[28px] leading-none">✎</span>
             <span>更新</span>
           </button>
