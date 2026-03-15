@@ -28,7 +28,9 @@ export interface PersonalAccountData {
   correspondencePostalCode: string;
   directMarketingConsent: string;
   emailVerified: boolean;
+  mobileVerified: boolean;
 }
+
 
 const defaultData: PersonalAccountData = {
   email: 'wong.kaming89@gmail.com',
@@ -57,6 +59,7 @@ const defaultData: PersonalAccountData = {
   correspondencePostalCode: '',
   directMarketingConsent: '是',
   emailVerified: false,
+  mobileVerified: false,
 };
 
 interface PersonalAccountContextType {
