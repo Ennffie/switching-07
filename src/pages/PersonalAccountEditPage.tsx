@@ -210,22 +210,22 @@ const PersonalAccountEditPage = () => {
                       <div className="max-h-[330px] overflow-y-auto overscroll-contain">
                         {regionMode ? (
                           <>
-                            <div className="px-6 pt-5 pb-2 text-[18px] text-[#5C5C5C]">中國</div>
+                            <div className="px-5 pt-3 pb-1 text-[18px] text-[#5C5C5C]">中國</div>
                             {regionChoices.map(item => (
-                              <button key={item} onClick={() => pickRegion(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
+                              <button key={item} onClick={() => pickRegion(item)} className={`w-full text-left pl-[68px] pr-8 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
                                 {item}
                               </button>
                             ))}
                             <div className="border-t border-[#ECECEC]" />
                             {countryList.filter(item => item !== '中國' && !regionChoices.includes(item)).map(item => (
-                              <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
+                              <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left pl-[68px] pr-8 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
                                 {item}
                               </button>
                             ))}
                           </>
                         ) : (
                           filteredCountries.filter(item => item !== '中國').map(item => (
-                            <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left px-11 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
+                            <button key={item} onClick={() => pickCountry(item)} className={`w-full text-left pl-[68px] pr-8 py-4 text-[22px] leading-none ${data.residentialCountry === item ? 'bg-[#FEF7EE] text-[#111]' : 'bg-white text-[#111]'}`}>
                               {item}
                             </button>
                           ))
