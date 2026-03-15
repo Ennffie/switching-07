@@ -4,10 +4,8 @@ import { ChevronLeft, ChevronDown, ChevronUp } from 'lucide-react';
 import { usePersonalAccount } from '../context/PersonalAccountContext';
 
 const funds = [
-  { name: '友邦強積金優選計劃 - 美洲基金', balance: 32150.5, color: '#1AA6A1' },
-  { name: '友邦強積金優選計劃 - 北美股票基金', balance: 31980.25, color: '#7597B8' },
-  { name: '友邦強積金優選計劃 - 增長組合', balance: 32245.8, color: '#F2A100' },
-  { name: '友邦強積金優選計劃 - 均衡組合', balance: 32020.36, color: '#7D5BA6' },
+  { name: '友邦強積金優選計劃 - 大中華股票基金', balance: 30426.94, color: '#F2A100' },
+  { name: '友邦強積金優選計劃 - 亞洲股票基金', balance: 246.84, color: '#19A7A4' },
 ];
 
 const PersonalAccountPage = () => {
@@ -21,7 +19,7 @@ const PersonalAccountPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const totalFundBalance = funds.reduce((sum, fund) => sum + fund.balance, 0);
+  const totalFundBalance = 30673.78;
   const donutGradient = (() => {
     const total = totalFundBalance;
     let current = 0;
@@ -84,7 +82,7 @@ const PersonalAccountPage = () => {
               <div className="absolute inset-[34px] rounded-full bg-white flex flex-col items-center justify-center text-center">
                 <div className="text-[20px] font-medium text-[#1F1F1F] mb-2">總結餘</div>
                 <div className="text-[25px] font-bold text-[#111] mb-2">$ {totalFundBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                <div className="text-[16px] text-[#7C7878]">截至 12/03/2026</div>
+                <div className="flex items-center gap-2 text-[#2AA69A] text-[18px] font-medium mb-1"><span>▲</span><span>$ 17,528.34</span></div><div className="text-[16px] text-[#1F1F1F]">截至 12/03/2026</div>
               </div>
             </div>
           </div>
@@ -95,22 +93,20 @@ const PersonalAccountPage = () => {
           </button>
 
           {openAssets && (
-            <div className="bg-[#F7F5F2] px-4 py-4 space-y-4">
+            <div className="bg-white">
+              <div className="grid grid-cols-2 border-b border-[#E7E0D6]">
+                <div className="text-center py-4 text-[18px] font-semibold text-[#1F1F1F] border-r border-[#E7E0D6]">市場價值</div>
+                <div className="text-center py-4 text-[18px] font-semibold text-[#CFC8C1]">強制性供款</div>
+              </div>
+              <div className="bg-[#F2A100] text-white grid grid-cols-[1fr_140px] px-4 py-2 text-[16px] font-semibold">
+                <div>基金名稱</div>
+                <div className="text-right">市場價值（港幣）</div>
+              </div>
               {funds.map((fund) => (
-                <div key={fund.name} className="bg-white rounded-[18px] border border-[#E8E3DD] p-5 flex items-start gap-4 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
-                  <div className="w-[10px] self-stretch rounded-full" style={{ backgroundColor: fund.color }} />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <div className="text-[20px] font-semibold leading-[1.35] text-[#1F1F1F]">{fund.name}</div>
-                      <img src="./icons/icon-external.png" alt="external" className="w-[22px] h-[22px] object-contain opacity-70 mt-1" />
-                    </div>
-                    <div className="text-[14px] text-[#8F8B8B] mb-1">基金結餘：</div>
-                    <div className="text-[20px] text-[#6D6A67]">$ {fund.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-                  </div>
-                  <div className="w-[86px] h-[86px] rounded-[14px] border border-[#D9D4CE] flex items-center justify-center text-[22px] text-[#1F1F1F] bg-white shrink-0">
-                    0
-                  </div>
-                  <div className="text-[20px] text-[#6D6A67] pt-7">%</div>
+                <div key={fund.name} className="grid grid-cols-[8px_1fr_140px] items-start border-b border-[#ECE7E1] bg-white">
+                  <div className="h-full min-h-[72px]" style={{ backgroundColor: fund.color }} />
+                  <div className="px-4 py-3 text-[16px] leading-[1.45] text-[#1F1F1F]">{fund.name}</div>
+                  <div className="px-4 py-3 text-right text-[18px] font-semibold text-[#1F1F1F]">$ {fund.balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                 </div>
               ))}
             </div>
