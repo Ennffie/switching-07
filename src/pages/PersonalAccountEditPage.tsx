@@ -3,19 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronDown, ChevronUp, Lightbulb } from 'lucide-react';
 import { usePersonalAccount } from '../context/PersonalAccountContext';
 
+const countryCodes = [
+  '+852', '+853', '+86', '+1', '+1-242', '+1-246', '+1-264', '+1-268', '+1-284', '+1-345', '+1-441', '+1-473', '+1-649', '+1-664', '+1-670', '+1-671', '+1-684', '+1-721', '+1-758', '+1-767', '+1-784', '+1-787', '+1-809', '+1-829', '+1-849', '+1-868', '+1-869', '+1-876',
+  '+20', '+27', '+30', '+31', '+32', '+33', '+34', '+36', '+39', '+40', '+41', '+43', '+44', '+45', '+46', '+47', '+48', '+49', '+51', '+52', '+54', '+55', '+56', '+57', '+58', '+60', '+61', '+62', '+63', '+64', '+65', '+66', '+81', '+82', '+84', '+90', '+91', '+92', '+93', '+94', '+95', '+98', '+211', '+212', '+213', '+216', '+218', '+220', '+221', '+222', '+223', '+224', '+225', '+226', '+227', '+228', '+229', '+230', '+231', '+232', '+233', '+234', '+235', '+236', '+237', '+238', '+239', '+240', '+241', '+242', '+243', '+244', '+245', '+246', '+248', '+249', '+250', '+251', '+252', '+253', '+254', '+255', '+256', '+257', '+258', '+260', '+261', '+262', '+263', '+264', '+265', '+266', '+267', '+268', '+269', '+290', '+291', '+297', '+298', '+299', '+350', '+351', '+352', '+353', '+354', '+355', '+356', '+357', '+358', '+359', '+370', '+371', '+372', '+373', '+374', '+375', '+376', '+377', '+378', '+380', '+381', '+382', '+385', '+386', '+387', '+389', '+420', '+421', '+423', '+500', '+501', '+502', '+503', '+504', '+505', '+506', '+507', '+508', '+509', '+590', '+591', '+592', '+593', '+594', '+595', '+596', '+597', '+598', '+599', '+670', '+672', '+673', '+674', '+675', '+676', '+677', '+678', '+679', '+680', '+681', '+682', '+683', '+685', '+686', '+687', '+688', '+689', '+690', '+691', '+692', '+850', '+855', '+856', '+880', '+886', '+960', '+961', '+962', '+963', '+964', '+965', '+966', '+967', '+968', '+970', '+971', '+972', '+973', '+974', '+975', '+976', '+977', '+992', '+993', '+994', '+995', '+996', '+998', '+011'
+];
+
 const PersonalAccountEditPage = () => {
   const navigate = useNavigate();
   const { data, setData } = usePersonalAccount();
   const [openContact, setOpenContact] = useState(true);
   const [openAddress, setOpenAddress] = useState(true);
   const [openComm, setOpenComm] = useState(false);
+  const [showSecondPhoneCodes, setShowSecondPhoneCodes] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const update = (key: keyof typeof data, value: string | boolean) => setData(prev => ({ ...prev, [key]: value }));
-
   const inputCls = 'w-full h-[58px] rounded-[6px] border border-[#E1DDDD] bg-white px-4 text-[18px] text-[#111] outline-none';
   const labelCls = 'text-[16px] text-[#8F8B8B] mb-3';
 
@@ -52,17 +57,28 @@ const PersonalAccountEditPage = () => {
             <div>
               <div className={labelCls}>手機號碼</div>
               <div className="grid grid-cols-[126px_1fr_104px] gap-3">
-                <input value={data.mobileCountryCode} onChange={e => update('mobileCountryCode', e.target.value)} className={inputCls} />
+                <div className="h-[58px] rounded-[6px] border border-[#E1DDDD] bg-white px-4 flex items-center text-[18px] text-[#111]">+852</div>
                 <input value={data.mobileNumber} onChange={e => update('mobileNumber', e.target.value)} className={inputCls} />
                 <button className="rounded-[6px] bg-[#F6E6AA] text-[18px] font-medium text-[#1F1F1F]">驗證</button>
               </div>
             </div>
-            <div>
+            <div className="relative">
               <div className={labelCls}>第二電話號碼（可選填）</div>
               <div className="grid grid-cols-[126px_1fr] gap-3">
-                <input value={data.secondPhoneCountryCode} onChange={e => update('secondPhoneCountryCode', e.target.value)} className={inputCls} placeholder="請輸入" />
+                <button onClick={() => setShowSecondPhoneCodes(v => !v)} className="h-[58px] rounded-[6px] border border-[#E3C16A] bg-white px-4 flex items-center justify-between text-[18px] text-[#B7B3B3]">
+                  <span>{data.secondPhoneCountryCode || '請…'}</span><ChevronDown size={20} />
+                </button>
                 <input value={data.secondPhoneNumber} onChange={e => update('secondPhoneNumber', e.target.value)} className={inputCls} />
               </div>
+              {showSecondPhoneCodes && (
+                <div className="absolute left-0 top-[104px] z-20 w-[126px] max-h-[320px] overflow-y-auto rounded-[6px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.14)] border border-[#E7E3E3]">
+                  {countryCodes.map(code => (
+                    <button key={code} onClick={() => { update('secondPhoneCountryCode', code); setShowSecondPhoneCodes(false); }} className="w-full text-left px-4 py-4 text-[18px] text-[#111] border-b border-[#F1EFEF] last:border-b-0">
+                      {code}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -70,10 +86,7 @@ const PersonalAccountEditPage = () => {
         {sectionHeader('地址', openAddress, () => setOpenAddress(v => !v))}
         {openAddress && (
           <div className="bg-[#FAF9F8] px-5 py-8 border-b border-[#ECE7E1]">
-            <div className="rounded-[12px] bg-[#FFF4E8] px-4 py-4 flex items-start gap-3 mb-8">
-              <Lightbulb size={22} className="text-[#1F1F1F] mt-0.5 flex-shrink-0" />
-              <div className="text-[16px] text-[#1F1F1F]">不接納郵政信箱。</div>
-            </div>
+            <div className="rounded-[12px] bg-[#FFF4E8] px-4 py-4 flex items-start gap-3 mb-8"><Lightbulb size={22} className="text-[#1F1F1F] mt-0.5 flex-shrink-0" /><div className="text-[16px] text-[#1F1F1F]">不接納郵政信箱。</div></div>
             <div className="text-[22px] font-semibold text-[#111] mb-6">住址</div>
             <div className="space-y-6">
               <div><div className={labelCls}>國家／地區</div><input value={data.residentialCountry} onChange={e => update('residentialCountry', e.target.value)} className={inputCls} /></div>
@@ -88,14 +101,8 @@ const PersonalAccountEditPage = () => {
             </div>
             <div className="text-[22px] font-semibold text-[#111] mt-10 mb-5">通訊地址</div>
             <div className="space-y-5 mb-6">
-              <label className="flex items-center gap-4 text-[20px] text-[#1F1F1F]">
-                <input type="radio" checked={data.correspondenceSameAsResidential} onChange={() => update('correspondenceSameAsResidential', true)} />
-                <span>與住址相同</span>
-              </label>
-              <label className="flex items-center gap-4 text-[20px] text-[#1F1F1F]">
-                <input type="radio" checked={!data.correspondenceSameAsResidential} onChange={() => update('correspondenceSameAsResidential', false)} />
-                <span>其他地址</span>
-              </label>
+              <label className="flex items-center gap-4 text-[20px] text-[#1F1F1F]"><input type="radio" checked={data.correspondenceSameAsResidential} onChange={() => update('correspondenceSameAsResidential', true)} /><span>與住址相同</span></label>
+              <label className="flex items-center gap-4 text-[20px] text-[#1F1F1F]"><input type="radio" checked={!data.correspondenceSameAsResidential} onChange={() => update('correspondenceSameAsResidential', false)} /><span>其他地址</span></label>
             </div>
             {!data.correspondenceSameAsResidential && (
               <div className="space-y-6">
