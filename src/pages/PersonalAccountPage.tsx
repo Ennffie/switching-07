@@ -18,7 +18,7 @@ const Field = ({ label, value }: { label: string; value: string }) => (
 const PersonalAccountPage = () => {
   const navigate = useNavigate();
   const { data } = usePersonalAccount();
-  const [activeTab, setActiveTab] = useState<'overview' | 'details'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'details'>('details');
   const [openContact] = useState(true);
   const [openAddress] = useState(true);
   const [openCommMethod] = useState(true);
@@ -180,13 +180,12 @@ const PersonalAccountPage = () => {
             </div>
           )}
 
-          <div className="fixed bottom-6 left-4 right-4 flex items-center gap-3 z-30">
-            <button onClick={() => navigate('/personal-account-edit')} className="flex-1 h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center gap-3 shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
-              <span className="text-[24px] leading-none">✎</span>
-              <span>更新</span>
+          <div className="px-5 pt-10 pb-12 bg-white">
+            <button onClick={() => navigate('/enrolment-terms')} className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center shadow-[0_6px_16px_rgba(0,0,0,0.18)] mb-5">
+              提交
             </button>
-            <button className="w-[58px] h-[58px] rounded-full bg-[#1B355C] flex items-center justify-center shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
-              <svg className="w-[22px] h-[22px] text-white" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            <button onClick={() => navigate(-1)} className="w-full text-center text-[20px] text-[#1F1F1F] font-medium">
+              返回
             </button>
           </div>
         </div>
