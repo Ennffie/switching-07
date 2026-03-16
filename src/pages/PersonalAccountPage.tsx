@@ -181,11 +181,11 @@ const PersonalAccountPage = () => {
           )}
 
           <div className="px-5 pt-10 pb-12 bg-white">
-            <button onClick={() => navigate('/enrolment-terms')} className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center shadow-[0_6px_16px_rgba(0,0,0,0.18)] mb-5">
-              提交
+            <button onClick={() => navigate('/personal-account-edit')} className="w-full h-[58px] rounded-full bg-[#1B355C] text-white text-[22px] font-semibold flex items-center justify-center shadow-[0_6px_16px_rgba(0,0,0,0.18)] mb-5">
+              儲存
             </button>
             <button onClick={() => navigate(-1)} className="w-full text-center text-[20px] text-[#1F1F1F] font-medium">
-              返回
+              取消
             </button>
           </div>
         </div>
