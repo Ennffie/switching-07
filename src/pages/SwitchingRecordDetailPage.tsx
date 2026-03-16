@@ -6,29 +6,20 @@ import { useTransfer } from '../context/TransferContext';
 
 const SwitchingRecordDetailPage = () => {
   const navigate = useNavigate();
-  const { referenceNumber, submittedAt, submittedEmployerMandatoryFunds, submittedEmployeeMandatoryFunds } = useFutureSubmission();
+  const { referenceNumber, submittedAt } = useFutureSubmission();
   const { transferData } = useTransfer();
 
   const [activeTab, setActiveTab] = useState<'plan' | 'future'>('plan');
   const [basicOpen, setBasicOpen] = useState(true);
   const [detailOpen, setDetailOpen] = useState(true);
 
-  const fallbackTransferOut = transferData.transferOut || [];
-  const fallbackTransferIn = transferData.transferIn || [];
-  const hasSubmitted = submittedEmployerMandatoryFunds.length > 0 || submittedEmployeeMandatoryFunds.length > 0;
+  const transferOutSections = transferData.transferOut || [];
+  const transferInSections = transferData.transferIn || [];
 
-  const outMandatory = hasSubmitted
-    ? submittedEmployerMandatoryFunds
-    : (fallbackTransferOut.find(section => section.title.includes('強制'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-  const outVoluntary = hasSubmitted
-    ? submittedEmployeeMandatoryFunds
-    : (fallbackTransferOut.find(section => section.title.includes('自願'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-  const inMandatory = hasSubmitted
-    ? submittedEmployerMandatoryFunds
-    : (fallbackTransferIn.find(section => section.title.includes('強制'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-  const inVoluntary = hasSubmitted
-    ? submittedEmployeeMandatoryFunds
-    : (fallbackTransferIn.find(section => section.title.includes('自願'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
+  const outMandatory = (transferOutSections.find(section => section.title.includes('強制'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
+  const outVoluntary = (transferOutSections.find(section => section.title.includes('自願'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
+  const inMandatory = (transferInSections.find(section => section.title.includes('強制'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
+  const inVoluntary = (transferInSections.find(section => section.title.includes('自願'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
 
   const outFundNames = Array.from(new Set([
     ...outMandatory.map(f => f.name),
@@ -121,11 +112,11 @@ const SwitchingRecordDetailPage = () => {
                 <div className="flex items-start gap-4">
                   <img src="./icons/aia-logo-new.jpg" alt="友邦" className="w-12 h-12 object-contain mt-1" />
                   <div>
-                    <div className="text-[18px] font-semibold text-[#1F1F1F] mb-4">友邦強積金優選計劃</div>
+                    <div className="text-[18px] font-semibold text-[#1F1F1F] mb-4">{transferData.step1?.planName || '友邦強積金優選計劃'}</div>
                     <div className="text-[15px] text-[#9A9898] mb-1">帳戶類別</div>
-                    <div className="text-[18px] text-[#1F1F1F] mb-5">一般僱員</div>
+                    <div className="text-[18px] text-[#1F1F1F] mb-5">{transferData.step1?.accountType || '一般僱員'}</div>
                     <div className="text-[15px] text-[#9A9898] mb-1">成員帳戶號碼</div>
-                    <div className="text-[18px] text-[#1F1F1F]">56442131</div>
+                    <div className="text-[18px] text-[#1F1F1F]">{transferData.step1?.accountNumber || '56442131'}</div>
                   </div>
                 </div>
               </div>
