@@ -19,9 +19,9 @@ const PersonalAccountPage = () => {
   const navigate = useNavigate();
   const { data } = usePersonalAccount();
   const [activeTab, setActiveTab] = useState<'overview' | 'details'>('overview');
-  const [openContact, setOpenContact] = useState(true);
-  const [openAddress, setOpenAddress] = useState(false);
-  const [openCommMethod, setOpenCommMethod] = useState(false);
+  const [openContact] = useState(true);
+  const [openAddress] = useState(true);
+  const [openCommMethod] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -41,11 +41,11 @@ const PersonalAccountPage = () => {
       .join(', ');
   })();
 
-  const sectionHeader = (title: string, open: boolean, onClick: () => void) => (
-    <button onClick={onClick} className="w-full bg-white px-5 py-5 flex items-center justify-between border-t border-[#ECE7E1] text-left">
+  const sectionHeader = (title: string, open: boolean) => (
+    <div className="w-full bg-white px-5 py-5 flex items-center justify-between border-t border-[#ECE7E1] text-left">
       <div className="text-[18px] font-medium text-[#1F1F1F]">{title}</div>
       {open ? <ChevronUp size={22} className="text-[#1F1F1F]" /> : <ChevronDown size={22} className="text-[#1F1F1F]" />}
-    </button>
+    </div>
   );
 
   return (
@@ -149,7 +149,7 @@ const PersonalAccountPage = () => {
             <div className="text-[16px] text-[#111] font-medium">24/09/2011</div>
           </div>
 
-          {sectionHeader('聯絡資料', openContact, () => setOpenContact(v => !v))}
+          {sectionHeader('聯絡資料', openContact)}
           {openContact && (
             <div className="px-5 py-5 bg-white space-y-7 border-b border-[#ECE7E1]">
               <Field label="電郵地址" value={data.email || 'enfieldlaw@yahoo.com.hk'} />
@@ -157,7 +157,7 @@ const PersonalAccountPage = () => {
             </div>
           )}
 
-          {sectionHeader('地址', openAddress, () => setOpenAddress(v => !v))}
+          {sectionHeader('地址', openAddress)}
           {openAddress && (
             <div className="px-5 py-5 bg-white space-y-7 border-b border-[#ECE7E1]">
               <Field label="國家／地區" value={data.residentialCountry || '香港'} />
@@ -168,7 +168,7 @@ const PersonalAccountPage = () => {
             </div>
           )}
 
-          {sectionHeader('通訊方式', openCommMethod, () => setOpenCommMethod(v => !v))}
+          {sectionHeader('通訊方式', openCommMethod)}
           {openCommMethod && (
             <div className="px-5 py-5 bg-white border-b border-[#ECE7E1]">
               <div className="text-[16px] text-[#111] leading-[1.7]">{data.directMarketingConsent === '是' ? '已同意直接促銷' : '未同意直接促銷'}</div>
