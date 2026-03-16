@@ -15,7 +15,7 @@ const SwitchingRecordsPage = () => {
       planName: '友邦強積金優選計劃',
       accountNumber: '56442131',
       icon: './icons/aia-logo-new.jpg',
-      transactionType: '基金轉移',
+      transactionType: '未來供款的投資組合',
       source: '流動應用程式',
     },
   ];
