@@ -81,7 +81,7 @@ const PersonalAccountTermsPage = () => {
 
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-4 z-40">
         <button
-          onClick={() => navigate('/personal-account-submitted')}
+          onClick={() => navigate('/invest/future-record-detail')}
           disabled={!canAccept}
           className={`w-full py-4 rounded-full text-lg font-medium mb-3 transition-all ${canAccept ? 'bg-[#1e3a5f] text-white active:scale-[0.98]' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
         >
