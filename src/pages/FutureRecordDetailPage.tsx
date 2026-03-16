@@ -24,7 +24,7 @@ const FutureRecordDetailPage = () => {
     <div className="min-h-screen bg-white flex flex-col">
       <div className="sticky top-0 z-30 bg-white border-b border-gray-200">
         <div className="px-4 py-3 flex items-center">
-          <button onClick={() => navigate(-1)} className="p-2 -ml-2">
+          <button onClick={() => navigate('/')} className="p-2 -ml-2">
             <ChevronLeft size={24} className="text-gray-700" />
           </button>
           <h1 className="flex-1 text-center text-base font-medium text-gray-900 mr-8">紀錄詳情</h1>
