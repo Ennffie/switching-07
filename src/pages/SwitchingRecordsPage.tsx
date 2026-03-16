@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Search, SlidersHorizontal, LayoutGrid } from 'lucide-react';
 import { useFutureSubmission } from '../context/FutureSubmissionContext';
 
-const FutureRecordsPage = () => {
+const SwitchingRecordsPage = () => {
   const navigate = useNavigate();
   const { referenceNumber } = useFutureSubmission();
 
@@ -69,4 +69,4 @@ const FutureRecordsPage = () => {
   );
 };
 
-export default FutureRecordsPage;
+export default SwitchingRecordsPage;

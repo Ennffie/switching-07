@@ -23,7 +23,7 @@ const FutureSuccessPage = () => {
 
         <div className="w-full max-w-sm space-y-4">
           <button
-            onClick={() => navigate('/invest/future-records')}
+            onClick={() => navigate('/invest/switching-records')}
             className="w-full py-4 bg-[#1e3a5f] text-white rounded-full text-lg font-medium active:scale-[0.98] transition-transform"
           >
             查閱提交狀態
