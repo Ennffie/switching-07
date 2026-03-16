@@ -103,7 +103,7 @@ const PersonalAccountConfirmPage = () => {
       <EditRow onClick={() => navigate('/personal-account-edit')} />
 
       <div className="bg-white mt-8 px-6 pt-8 pb-12">
-        <button onClick={() => navigate('/enrolment-terms')} className="w-full h-[58px] rounded-full bg-[#19345B] text-white text-[21px] font-semibold mb-5">
+        <button onClick={() => navigate('/personal-account-terms')} className="w-full h-[58px] rounded-full bg-[#19345B] text-white text-[21px] font-semibold mb-5">
           提交
         </button>
         <button onClick={() => navigate('/personal-account-edit')} className="w-full text-center text-[20px] text-[#1F1F1F] font-medium">
