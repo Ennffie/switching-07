@@ -2,45 +2,24 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronUp, ChevronDown, Info } from 'lucide-react';
 import { useFutureSubmission } from '../context/FutureSubmissionContext';
-import { useTransfer } from '../context/TransferContext';
 
 const FutureRecordDetailPage = () => {
   const navigate = useNavigate();
   const { referenceNumber, submittedAt, submittedEmployerMandatoryFunds, submittedEmployeeMandatoryFunds } = useFutureSubmission();
-  const { transferData } = useTransfer();
 
   const [activeTab, setActiveTab] = useState<'plan' | 'future'>('future');
   const [basicOpen, setBasicOpen] = useState(true);
   const [detailOpen, setDetailOpen] = useState(true);
 
-  const fallbackTransferOut = transferData.transferOut || [];
-  const fallbackTransferIn = transferData.transferIn || [];
-  const hasSubmitted = submittedEmployerMandatoryFunds.length > 0 || submittedEmployeeMandatoryFunds.length > 0;
-
-  const outMandatory = hasSubmitted
-    ? submittedEmployerMandatoryFunds
-    : (fallbackTransferOut.find(section => section.title.includes('強制'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-  const outVoluntary = hasSubmitted
-    ? submittedEmployeeMandatoryFunds
-    : (fallbackTransferOut.find(section => section.title.includes('自願'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-  const inMandatory = hasSubmitted
-    ? submittedEmployerMandatoryFunds
-    : (fallbackTransferIn.find(section => section.title.includes('強制'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-  const inVoluntary = hasSubmitted
-    ? submittedEmployeeMandatoryFunds
-    : (fallbackTransferIn.find(section => section.title.includes('自願'))?.funds || []).map(f => ({ name: f.name, allocation: f.percentage }));
-
-  const outFundNames = Array.from(new Set([
-    ...outMandatory.map(f => f.name),
-    ...outVoluntary.map(f => f.name),
-  ]));
-  const inFundNames = Array.from(new Set([
-    ...inMandatory.map(f => f.name),
-    ...inVoluntary.map(f => f.name),
-  ]));
+  const allFundNames = Array.from(
+    new Set([
+      ...submittedEmployerMandatoryFunds.map((f) => f.name),
+      ...submittedEmployeeMandatoryFunds.map((f) => f.name),
+    ])
+  );
 
   const getAllocation = (list: { name: string; allocation: number }[], name: string) => {
-    return list.find(f => f.name === name)?.allocation ?? 0;
+    return list.find((f) => f.name === name)?.allocation ?? 0;
   };
 
   return (
@@ -67,7 +46,7 @@ const FutureRecordDetailPage = () => {
           </div>
         </div>
 
-        <button onClick={() => setBasicOpen(v => !v)} className="w-full px-4 py-4 flex items-center justify-between border-t border-b border-[#ECECEC]">
+        <button onClick={() => setBasicOpen((v) => !v)} className="w-full px-4 py-4 flex items-center justify-between border-t border-b border-[#ECECEC]">
           <span className="text-[18px] text-[#1F1F1F]">基本資料</span>
           {basicOpen ? <ChevronUp size={20} className="text-[#1F1F1F]" /> : <ChevronDown size={20} className="text-[#1F1F1F]" />}
         </button>
@@ -104,7 +83,7 @@ const FutureRecordDetailPage = () => {
               {activeTab === 'plan' && <div className="absolute left-8 right-8 bottom-0 h-[4px] bg-[#F5A623] rounded-full" />}
             </button>
             <button onClick={() => setActiveTab('future')} className={`flex-1 py-4 text-[18px] font-medium relative ${activeTab === 'future' ? 'text-[#E6A23C]' : 'text-[#C5C1C1]'}`}>
-              基金轉換指示
+              未來供款的投資
               {activeTab === 'future' && <div className="absolute left-8 right-8 bottom-0 h-[4px] bg-[#F5A623] rounded-full" />}
             </button>
           </div>
@@ -112,7 +91,7 @@ const FutureRecordDetailPage = () => {
 
         {activeTab === 'plan' && (
           <div>
-            <button onClick={() => setDetailOpen(v => !v)} className="w-full px-4 py-4 flex items-center justify-between border-t border-b border-[#ECECEC]">
+            <button onClick={() => setDetailOpen((v) => !v)} className="w-full px-4 py-4 flex items-center justify-between border-t border-b border-[#ECECEC]">
               <span className="text-[18px] text-[#1F1F1F]">選擇計劃</span>
               {detailOpen ? <ChevronUp size={20} className="text-[#1F1F1F]" /> : <ChevronDown size={20} className="text-[#1F1F1F]" />}
             </button>
@@ -135,42 +114,24 @@ const FutureRecordDetailPage = () => {
 
         {activeTab === 'future' && (
           <div>
-            <button onClick={() => setDetailOpen(v => !v)} className="w-full px-4 py-4 flex items-center justify-between border-t border-b border-[#ECECEC]">
-              <span className="text-[18px] text-[#1F1F1F]">基金轉換指示 1</span>
+            <button onClick={() => setDetailOpen((v) => !v)} className="w-full px-4 py-4 flex items-center justify-between border-t border-b border-[#ECECEC]">
+              <span className="text-[18px] text-[#1F1F1F]">投資授權</span>
               {detailOpen ? <ChevronUp size={20} className="text-[#1F1F1F]" /> : <ChevronDown size={20} className="text-[#1F1F1F]" />}
             </button>
             {detailOpen && (
               <div className="px-4 py-5">
-                <p className="text-[15px] leading-[1.6] text-[#1F1F1F] mb-4">請確定以下基金轉換指示。</p>
-
-                <div className="text-[18px] font-semibold text-[#1F1F1F] mb-3">轉出現有基金</div>
-                <div className="overflow-hidden border border-[#E6E0D8] mb-8">
-                  <div className="grid grid-cols-3 bg-[#F5A623] text-white text-[16px] font-medium">
-                    <div className="p-3">基金名稱</div>
-                    <div className="p-3">僱主強制性供款（港幣）</div>
-                    <div className="p-3">僱主自願性供款（港幣）</div>
-                  </div>
-                  {outFundNames.length > 0 ? outFundNames.map((name, idx) => (
-                    <div key={`out-${idx}`} className="grid grid-cols-3 border-t border-[#EEE9E3] text-[16px] text-[#1F1F1F]">
-                      <div className="p-3 leading-[1.5]">{name}</div>
-                      <div className="p-3">{getAllocation(outMandatory, name)}%</div>
-                      <div className="p-3">{getAllocation(outVoluntary, name)}%</div>
-                    </div>
-                  )) : null}
-                </div>
-
-                <div className="text-[18px] font-semibold text-[#1F1F1F] mb-3">轉入基金</div>
+                <p className="text-[15px] leading-[1.6] text-[#1F1F1F] mb-4">請留意，任何於當日下午4時或之後的更改或提交的指示，將於下一個工作天處理。</p>
                 <div className="overflow-hidden border border-[#E6E0D8]">
                   <div className="grid grid-cols-3 bg-[#F5A623] text-white text-[16px] font-medium">
                     <div className="p-3">基金名稱</div>
                     <div className="p-3">僱主強制性供款（港幣）</div>
                     <div className="p-3">僱主自願性供款（港幣）</div>
                   </div>
-                  {inFundNames.length > 0 ? inFundNames.map((name, idx) => (
-                    <div key={`in-${idx}`} className="grid grid-cols-3 border-t border-[#EEE9E3] text-[16px] text-[#1F1F1F]">
+                  {allFundNames.length > 0 ? allFundNames.map((name, idx) => (
+                    <div key={idx} className="grid grid-cols-3 border-t border-[#EEE9E3] text-[16px] text-[#1F1F1F]">
                       <div className="p-3 leading-[1.5]">{name}</div>
-                      <div className="p-3">{getAllocation(inMandatory, name)}%</div>
-                      <div className="p-3">{getAllocation(inVoluntary, name)}%</div>
+                      <div className="p-3">{getAllocation(submittedEmployerMandatoryFunds, name)}%</div>
+                      <div className="p-3">{getAllocation(submittedEmployeeMandatoryFunds, name)}%</div>
                     </div>
                   )) : null}
                 </div>
