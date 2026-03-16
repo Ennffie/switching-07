@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 interface PlanData {
   planName: string;
@@ -40,10 +40,29 @@ const defaultData: TransferData = {
   transferIn: [],
 };
 
+const STORAGE_KEY = 'switching-transfer-data';
+
+const loadStoredTransferData = (): TransferData => {
+  if (typeof window === 'undefined') return defaultData;
+
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultData;
+    const parsed = JSON.parse(raw);
+    return {
+      step1: parsed?.step1 ?? null,
+      transferOut: Array.isArray(parsed?.transferOut) ? parsed.transferOut : [],
+      transferIn: Array.isArray(parsed?.transferIn) ? parsed.transferIn : [],
+    };
+  } catch {
+    return defaultData;
+  }
+};
+
 const TransferContext = createContext<TransferContextType | undefined>(undefined);
 
 export function TransferProvider({ children }: { children: ReactNode }) {
-  const [transferData, setTransferData] = useState<TransferData>(defaultData);
+  const [transferData, setTransferData] = useState<TransferData>(() => loadStoredTransferData());
 
   const setStep1Data = (data: PlanData) => {
     setTransferData(prev => ({ ...prev, step1: data }));
@@ -59,7 +78,15 @@ export function TransferProvider({ children }: { children: ReactNode }) {
 
   const resetTransferData = () => {
     setTransferData(defaultData);
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(STORAGE_KEY);
+    }
   };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(transferData));
+  }, [transferData]);
 
   return (
     <TransferContext.Provider
