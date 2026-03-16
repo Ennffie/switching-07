@@ -9,7 +9,7 @@ const SwitchingRecordDetailPage = () => {
   const { referenceNumber, submittedAt, submittedEmployerMandatoryFunds, submittedEmployeeMandatoryFunds } = useFutureSubmission();
   const { transferData } = useTransfer();
 
-  const [activeTab, setActiveTab] = useState<'plan' | 'future'>('future');
+  const [activeTab, setActiveTab] = useState<'plan' | 'future'>('plan');
   const [basicOpen, setBasicOpen] = useState(true);
   const [detailOpen, setDetailOpen] = useState(true);
 
