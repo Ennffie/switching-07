@@ -243,6 +243,12 @@ const TermsPage = () => {
       {showNextDayModal && (
         <div className="fixed inset-0 z-[200] bg-black/45 flex items-center justify-center px-4">
           <div className="relative w-full max-w-[520px] rounded-[28px] bg-white px-6 pt-6 pb-8 shadow-2xl">
+            <button
+              onClick={() => setShowNextDayModal(false)}
+              className="absolute right-5 top-5 text-[#1F1F1F]"
+            >
+              ×
+            </button>
 
             <div className="flex flex-col items-center text-center pt-4">
               <img
