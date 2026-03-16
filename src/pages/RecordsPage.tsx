@@ -40,9 +40,10 @@ const RecordsPage = () => {
         {/* Record Cards */}
         <div className="space-y-4">
           {records.map((record, index) => (
-            <div 
+            <button 
               key={index}
-              className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+              onClick={() => navigate('/invest/switching-record-detail')}
+              className="w-full text-left bg-white rounded-xl p-4 shadow-sm border border-gray-100"
             >
               {/* Reference Numbers */}
               <div className="bg-[#FFF8E7] p-3 rounded-lg mb-3">
@@ -78,7 +79,7 @@ const RecordsPage = () => {
                 <p className="text-gray-500">交易來源</p>
                 <p className="text-right text-gray-900">{record.source}</p>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
