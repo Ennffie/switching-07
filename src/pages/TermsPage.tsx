@@ -218,6 +218,7 @@ const TermsPage = () => {
       </div>
 
       {/* Bottom Buttons */}
+      {!showNextDayModal && (
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-4 z-40">
         <button 
           onClick={() => setShowNextDayModal(true)}
@@ -237,7 +238,7 @@ const TermsPage = () => {
           拒絕
         </button>
       {showNextDayModal && (
-        <div className="fixed inset-0 z-[60] bg-black/35 flex items-center justify-center px-4">
+        <div className="fixed inset-0 z-[200] bg-black/45 flex items-center justify-center px-4">
           <div className="relative w-full max-w-[520px] rounded-[28px] bg-white px-6 pt-6 pb-8 shadow-2xl">
             <button
               onClick={() => setShowNextDayModal(false)}
@@ -273,6 +274,7 @@ const TermsPage = () => {
       )}
 
       </div>
+      )}
 
     </div>
   );
