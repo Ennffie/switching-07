@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 export type SavedFundAllocation = { name: string; allocation: number };
@@ -13,6 +13,19 @@ interface FutureSubmissionContextType {
   resetFutureSubmission: () => void;
 }
 
+const FUTURE_SUBMISSION_STORAGE_KEY = 'future-submission-data';
+
+const loadFutureSubmissionData = () => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = window.localStorage.getItem(FUTURE_SUBMISSION_STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+};
+
 const FutureSubmissionContext = createContext<FutureSubmissionContextType | undefined>(undefined);
 
 export const FutureSubmissionProvider = ({ children }: { children: ReactNode }) => {
@@ -24,17 +37,31 @@ export const FutureSubmissionProvider = ({ children }: { children: ReactNode }) 
     return `${dateStr}, ${timeStr}`;
   };
 
-  const [referenceNumber, setReferenceNumber] = useState<string>(makeReferenceNumber());
-  const [submittedEmployerMandatoryFunds, setSubmittedEmployerMandatoryFunds] = useState<SavedFundAllocation[]>([]);
-  const [submittedEmployeeMandatoryFunds, setSubmittedEmployeeMandatoryFunds] = useState<SavedFundAllocation[]>([]);
-  const [submittedAt, setSubmittedAt] = useState<string>(makeSubmittedAt());
+  const saved = loadFutureSubmissionData();
+  const [referenceNumber, setReferenceNumber] = useState<string>(saved?.referenceNumber || makeReferenceNumber());
+  const [submittedEmployerMandatoryFunds, setSubmittedEmployerMandatoryFunds] = useState<SavedFundAllocation[]>(saved?.submittedEmployerMandatoryFunds || []);
+  const [submittedEmployeeMandatoryFunds, setSubmittedEmployeeMandatoryFunds] = useState<SavedFundAllocation[]>(saved?.submittedEmployeeMandatoryFunds || []);
+  const [submittedAt, setSubmittedAt] = useState<string>(saved?.submittedAt || makeSubmittedAt());
 
   const resetFutureSubmission = () => {
     setReferenceNumber(makeReferenceNumber());
     setSubmittedAt(makeSubmittedAt());
     setSubmittedEmployerMandatoryFunds([]);
     setSubmittedEmployeeMandatoryFunds([]);
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(FUTURE_SUBMISSION_STORAGE_KEY);
+    }
   };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(FUTURE_SUBMISSION_STORAGE_KEY, JSON.stringify({
+      referenceNumber,
+      submittedAt,
+      submittedEmployerMandatoryFunds,
+      submittedEmployeeMandatoryFunds,
+    }));
+  }, [referenceNumber, submittedAt, submittedEmployerMandatoryFunds, submittedEmployeeMandatoryFunds]);
 
   return (
     <FutureSubmissionContext.Provider value={{ referenceNumber, submittedAt, submittedEmployerMandatoryFunds, submittedEmployeeMandatoryFunds, setSubmittedEmployerMandatoryFunds, setSubmittedEmployeeMandatoryFunds, resetFutureSubmission }}>
