@@ -129,7 +129,7 @@ const FutureConfirmPage = () => {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-4 z-40">
-        <button onClick={() => navigate('/invest/terms')} className="w-full py-4 bg-[#1e3a5f] text-white rounded-full text-lg font-medium active:scale-[0.98] transition-transform">
+        <button onClick={() => navigate('/invest/future-terms')} className="w-full py-4 bg-[#1e3a5f] text-white rounded-full text-lg font-medium active:scale-[0.98] transition-transform">
           提交
         </button>
       </div>
